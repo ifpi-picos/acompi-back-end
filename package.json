@@ -1,0 +1,28 @@
+{
+  "name": "acompi-back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node ./dist/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ifpi-picos/acompi-back-end.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ifpi-picos/acompi-back-end/issues"
+  },
+  "homepage": "https://github.com/ifpi-picos/acompi-back-end#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "type-express": "^0.0.2",
+    "typescript": "^4.8.2"
+  }
+}
