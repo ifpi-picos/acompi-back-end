@@ -1,1 +1,1 @@
-# acompi-back-end
+Banco de Dados - ACOMPI
