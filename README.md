@@ -1,4 +1,4 @@
-# Acompi front-end
+# Acompi back-end
 Projeto Integrador II e Programação para Internet II │ 2022.2
 
 **Membros da equipe**
