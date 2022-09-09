@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import rotasAluno from './alunos';
+import rotasProfessor from './professor';
 
 const rotas = Router();
 
@@ -8,5 +9,6 @@ rotas.get('/', (req: Request, res: Response) => {
 });
 
 rotas.use('/alunos', rotasAluno);
+rotas.use('/professor', rotasProfessor);
 
 export default rotas;
