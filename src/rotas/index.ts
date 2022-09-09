@@ -1,10 +1,12 @@
 import { Router, Request, Response } from 'express';
-import rotas from './alunos';
+import rotasAluno from './alunos';
 
+const rotas = Router();
 
-const app = express();
+rotas.get('/', (req: Request, res: Response) => {
+  res.send('você está no index');
+});
 
-app.get('', () => {
-console.log('funcionou')})
+rotas.use('/alunos', rotasAluno);
 
-export default app;
+export default rotas;
