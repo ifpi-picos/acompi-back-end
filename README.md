@@ -46,6 +46,14 @@ Os passos para se efetuar uma reserva no ACOMPI são:
 
 - Exemplo: se uma turma tem 30 cartões e o laboratório 15 computadores, o sistema prioriza os cartões e os 15 primeiros efetuam a reserva.
 
+**Motivo da escolha das tecnologias**
+
+As tecnologias escolhidas foram usadas pois foram as ensinadas durante o curso
+
+**Implementação futura**
+
+Não temos previsão de alterações futuras após o fim do projeto.
+
 **Wireframes**
 
 https://miro.com/welcomeonboard/cWZYRVp0Q0VHTENidklKTG1PMVFUcTdORVVQNFMzRkd0S29iSm13Y2tuS2hyUGtLSU11MEo1SzljSXNHSVkyTHwzNDU4NzY0NTI0ODI3OTEwOTU4?share_link_id=626552663970
@@ -58,8 +66,27 @@ https://octopus.do/3rto2gys4i6
 
 https://www.happyhues.co/palettes/3
 
+**Execução do projeto**
+
+O projeto ainda está em desenvolvimento e não está pronto para a execução
+
+**Créditos**
+
+https://github.com/Allan-Barbosa <br />
+https://github.com/IagoBrenoAD <br />
+https://github.com/KingKing2019 <br />
+https://github.com/RodrigoPereira25 <br />
+
+**Teste**
+
+Nossas rotas podem ser testadas usando programas como httpie (https://httpie.io/).
+
 **Badges**
 
+[![GitHub contributors](https://img.shields.io/github/contributors/ifpi-picos/acompi-back-end)](https://github.com/ifpi-picos/acompi-back-end/contributors/)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+[![Visual Studio](https://badgen.net/badge/icon/visualstudio?icon=visualstudio&label)](https://visualstudio.microsoft.com)
+[![TypeScript](https://img.shields.io/badge/--3178C6?logo=typescript&logoColor=ffffff)](https://www.typescriptlang.org/)
 [![GitHub issues](https://img.shields.io/github/issues/ifpi-picos/acompi-back-end)](https://github.com/ifpi-picos/acompi-back-end/issues)
 [![GitHub forks](https://img.shields.io/github/forks/ifpi-picos/acompi-back-end)](https://github.com/ifpi-picos/acompi-back-end/network)
 [![GitHub stars](https://img.shields.io/github/stars/ifpi-picos/acompi-back-end)](https://github.com/ifpi-picos/acompi-back-end/stargazers)
