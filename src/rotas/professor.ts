@@ -1,6 +1,5 @@
 import { Router, Request, Response } from 'express';
 
-
 const rotas = Router();
 
 rotas.get('/', (req: Request, res: Response) => {
