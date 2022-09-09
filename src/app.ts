@@ -5,4 +5,4 @@ const app = express();
 app.use('/', rotas)
 
 app.listen(3000, () =>
-console.log('servidor funcionando'));
+console.log('Servidor funcionando!'));
