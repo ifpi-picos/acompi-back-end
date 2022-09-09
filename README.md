@@ -57,3 +57,10 @@ https://octopus.do/3rto2gys4i6
 **Paleta de cores**
 
 https://www.happyhues.co/palettes/3
+
+**Badges**
+
+[![GitHub issues](https://img.shields.io/github/issues/ifpi-picos/acompi-back-end)](https://github.com/ifpi-picos/acompi-back-end/issues)
+[![GitHub forks](https://img.shields.io/github/forks/ifpi-picos/acompi-back-end)](https://github.com/ifpi-picos/acompi-back-end/network)
+[![GitHub stars](https://img.shields.io/github/stars/ifpi-picos/acompi-back-end)](https://github.com/ifpi-picos/acompi-back-end/stargazers)
+[![GitHub license](https://img.shields.io/github/license/ifpi-picos/acompi-back-end)](https://github.com/ifpi-picos/acompi-back-end/blob/main/LICENSE)
