@@ -48,4 +48,49 @@ rotas.get('escolher-turma.html', (req: Request, res: Response) => {
   res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/formulario-reserva-computador.html');
 });
 
+rotas.get('ver-cancelar-reservas.html', (req: Request, res: Response) => {
+  // página com as reservas do aluno
+  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/ver-cancelar-reservas.html');
+});
+
+// filtrar = botão
+rotas.get('ver-cancelar-reservas.html', (req: Request, res: Response) => {
+  // página com as reservas do aluno filtradas
+  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/ver-cancelar-reservas.html');
+});
+
+// cancelar-reserva= botão
+rotas.delete('ver-cancelar-reservas.html/cancelar-reserva', (req: Request, res: Response) => {
+  // deletar reserva do aluno
+  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/ver-cancelar-reservas.html');
+});
+
+// cancelar-reserva= botão
+rotas.delete('ver-cancelar-reservas.html/cancelar-reserva', (req: Request, res: Response) => {
+  // deletar reserva do aluno
+  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/ver-cancelar-reservas.html');
+});
+
+rotas.get('modificar-dados-usuario.html', (req: Request, res: Response) => {
+  // página de modificar nome de usuário
+  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/modificar-dados-usuario.html');
+});
+
+rotas.get('modificar-dados-usuario.html', (req: Request, res: Response) => {
+  // página de modificar nome de usuário
+  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/modificar-dados-usuario.html');
+});
+
+// salvar alterações = botão
+rotas.put('modificar-dados-usuario.html', (req: Request, res: Response) => {
+  // modifica nome do usuário
+  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/escolher-turma.html');
+});
+
+// sair = botão
+rotas.get('/sair', (req: Request, res: Response) => {
+  // ir para a página home do site
+  res.end('https://ifpi-picos.github.io/acompi-front-end/')
+});
+
 export default rotas;
