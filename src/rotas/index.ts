@@ -7,7 +7,8 @@ import rotasAutenticacao from './autenticacao';
 const rotas = Router();
 
 rotas.get('/', (req: Request, res: Response) => {
-  res.send('você está no index');
+  // levando usuário para a home
+  res.send('https://ifpi-picos.github.io/acompi-front-end/');
 });
 
 rotas.use('usuarios/alunos', rotasAluno);
