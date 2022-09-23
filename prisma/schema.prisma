@@ -16,10 +16,3 @@ model Usuario {
   nome  String?
   @@map("usuarios")
 }
-
-model administrador {
-  email    string     @id @default
-  email String  @unique
-  nome  String?
-  @@map("usuarios")
-}
