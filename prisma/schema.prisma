@@ -17,9 +17,31 @@ model Usuario {
   @@map("usuarios")
 }
 
-model administrador {
-  email    string     @id @default
-  email String  @unique
-  nome  String?
-  @@map("usuarios")
+model Aluno {
+  email_aluno String  @db.VarChar(20) @id
+  nome  String
+  reservas Reserva[]
+  @@map("aluno")
 }
+
+model Reserva{
+  email_aluno String  @db.VarChar(20) @id
+  id_turma Int
+  aluno Aluno   @relation(fields: [email_aluno], references: [email_aluno])
+  // turma Turma   @relation(fields: [id_turma], references: [id_turma])
+  @@map("reserva")
+}
+
+// model Turma{
+//   id_turma Int @id @default(autoincrement())
+//   email_professor String  @db.VarChar(20) @id
+//   id_lab Int
+//   data_turma DateTime
+//   horario_inicio DateTime?  @db.Time(0)
+//   horario_fim DateTime?  @db.Time(0)
+//   curso_professor String  @db.VarChar(20)
+//   Professor professor   @relation(fields: [email_professor], references: [email_professor])
+//   lab lab   @relation(fields: [id_lab], references: [id_lab])
+//   reservas Reserva[]
+//   @@map("turma")
+// }
