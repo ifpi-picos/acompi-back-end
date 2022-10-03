@@ -1,96 +1,37 @@
 import { Router, Request, Response } from 'express';
+import { PrismaClient } from '@prisma/client';
 
 const rotas = Router();
+const prisma = new PrismaClient();
 
-rotas.get('/', (req: Request, res: Response) => {
-  // página inicial de aluno
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/professores.html')
+rotas.get('/reservas', async (req: Request, res: Response) => {
+  const reservas = await prisma.reserva.findMany({});
+  res.json(reservas);
 });
 
-// saiba-mais = botão
-rotas.get('professores.html/saiba-mais', (req: Request, res: Response) => {
-  // página com os professores para o aluno selecionar
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/escolher-turma.html');
+rotas.post('/reservar', async (req: Request, res: Response) => {
+  const { email_aluno, id_turma } = req.body;
+  try {
+    const reserva = await prisma.reserva.create({
+      data: {
+        email_aluno,
+        id_turma,
+      },
+    });
+    res.json(reserva);
+  } catch (erro) {
+    res.status(400).send(erro);
+  }
 });
 
-rotas.get('escolher-turma.html', (req: Request, res: Response) => {
-  // página com as turmas para o aluno selecionar
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/formulario-reserva-computador.html');
-});
-
-// reservar = botão
-rotas.get('escolher-turma.html/reservar', (req: Request, res: Response) => {
-  // página com formulário para o aluno realizar a reserva
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/formulario-reserva-computador.html');
-});
-
-// cancelar = botão
-rotas.get('formulario-reserva-computador.html/cancelar', (req: Request, res: Response) => {
-  // página com as turmas para o aluno selecionar
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/escolher-turma.html');
-});
-
-// reservar = botão
-rotas.post('formulario-reserva-computador.html/reservar', (req: Request, res: Response) => {
-  // página com as reservas dos alunos
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/ver-cancelar-reservas.html');
-});
-
-// filtrar = botão
-rotas.get('/filtrar', (req: Request, res: Response) => {
-  // página inicial de aluno com professores filtrados
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/professores.html')
-});
-
-// filtrar = botão
-rotas.get('escolher-turma.html', (req: Request, res: Response) => {
-  // página com as turmas filtradas para o aluno selecionar
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/formulario-reserva-computador.html');
-});
-
-rotas.get('ver-cancelar-reservas.html', (req: Request, res: Response) => {
-  // página com as reservas do aluno
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/ver-cancelar-reservas.html');
-});
-
-// filtrar = botão
-rotas.get('ver-cancelar-reservas.html', (req: Request, res: Response) => {
-  // página com as reservas do aluno filtradas
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/ver-cancelar-reservas.html');
-});
-
-// cancelar-reserva= botão
-rotas.delete('ver-cancelar-reservas.html/cancelar-reserva', (req: Request, res: Response) => {
-  // deletar reserva do aluno
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/ver-cancelar-reservas.html');
-});
-
-// cancelar-reserva= botão
-rotas.delete('ver-cancelar-reservas.html/cancelar-reserva', (req: Request, res: Response) => {
-  // deletar reserva do aluno
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/ver-cancelar-reservas.html');
-});
-
-rotas.get('modificar-dados-usuario.html', (req: Request, res: Response) => {
-  // página de modificar nome de usuário
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/modificar-dados-usuario.html');
-});
-
-rotas.get('modificar-dados-usuario.html', (req: Request, res: Response) => {
-  // página de modificar nome de usuário
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/modificar-dados-usuario.html');
-});
-
-// salvar alterações = botão
-rotas.put('modificar-dados-usuario.html', (req: Request, res: Response) => {
-  // modifica nome do usuário
-  res.end('https://ifpi-picos.github.io/acompi-front-end/usuarios/aluno/escolher-turma.html');
-});
-
-// sair = botão
-rotas.get('/sair', (req: Request, res: Response) => {
-  // ir para a página home do site
-  res.end('https://ifpi-picos.github.io/acompi-front-end/')
+rotas.delete('/cancela_reserva', async (req: Request, res: Response) => {
+  const { email_aluno} = req.body;
+  const delete_reserva = await prisma.reserva.delete({
+    where: {
+      email_aluno: email_aluno,
+    },
+  })
+  res.json(delete_reserva)
 });
 
 export default rotas;

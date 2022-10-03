@@ -20,14 +20,14 @@ model Usuario {
 model Aluno {
   email_aluno String  @db.VarChar(20) @id
   nome  String
-  reservas Reserva[]
+  // reservas Reserva[]
   @@map("aluno")
 }
 
 model Reserva{
   email_aluno String  @db.VarChar(20) @id
   id_turma Int
-  aluno Aluno   @relation(fields: [email_aluno], references: [email_aluno])
+  // aluno Aluno   @relation(fields: [email_aluno], references: [email_aluno])
   // turma Turma   @relation(fields: [id_turma], references: [id_turma])
   @@map("reserva")
 }
