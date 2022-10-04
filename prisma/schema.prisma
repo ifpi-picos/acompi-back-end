@@ -20,6 +20,7 @@ model Usuario {
 model Aluno {
   email_aluno String  @db.VarChar(20) @id
   nome  String
+  senha  String
   // reservas Reserva[]
   @@map("aluno")
 }
