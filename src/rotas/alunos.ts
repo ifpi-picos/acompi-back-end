@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 rotas.get('/reservas', async (req: Request, res: Response) => {
   const reservas = await prisma.reserva.findMany({});
-  res.json(reservas);
+  res.status(200).json(reservas);
 });
 
 rotas.post('/reservar', async (req: Request, res: Response) => {
@@ -18,7 +18,7 @@ rotas.post('/reservar', async (req: Request, res: Response) => {
         id_turma,
       },
     });
-    res.json(reserva);
+    res.status(201).json(reserva);
   } catch (erro) {
     res.status(400).send(erro);
   }
@@ -31,7 +31,7 @@ rotas.delete('/cancela_reserva', async (req: Request, res: Response) => {
       email_aluno: email_aluno,
     },
   })
-  res.json(delete_reserva)
+  res.status(200).json(delete_reserva)
 });
 
 export default rotas;
