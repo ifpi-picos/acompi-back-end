@@ -33,6 +33,23 @@ model Reserva{
   @@map("reserva")
 }
 
+model Professor {
+  email_professor String  @db.VarChar(20) @id
+  nome String
+  senha String
+  @@map("professor")
+}
+
+model CriarTurma {
+  id_turma Int @unique
+  email_professor String @db.VarChar(20) @id
+  id_lab Int
+  data_turma DateTime
+  horario_inicio DateTime
+  horario_fim DateTime
+  curso String @db.VarChar(20)
+}
+
 // model Turma{
 //   id_turma Int @id @default(autoincrement())
 //   email_professor String  @db.VarChar(20) @id
