@@ -33,6 +33,23 @@ model Reserva{
   @@map("reserva")
 }
 
+model Administrador {
+  email_adm String  @unique @db.VarChar(20)
+  nome_adm  String
+  //proibe_laboratorio ProibeLaboratorio []
+  @@map("administrador")
+}
+
+model ProibeLaboratorio {
+  //email_adm String  @unique @db.VarChar(20) @default(uuid())
+  id Int @unique @default(autoincrement())
+  data_inicio DateTime?
+  data_fim DateTime?
+  //administrador Administrador? @relation(fields: [email_adm], references: [email_adm])
+  //falta conexao tblaboratorio
+  @@map("proibelaboratorio")
+}
+
 // model Turma{
 //   id_turma Int @id @default(autoincrement())
 //   email_professor String  @db.VarChar(20) @id
