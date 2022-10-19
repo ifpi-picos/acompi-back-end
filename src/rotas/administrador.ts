@@ -30,4 +30,3 @@ rotas.delete('/', (req: Request, res: Response) => {
 });
 
 export default rotas;
-
