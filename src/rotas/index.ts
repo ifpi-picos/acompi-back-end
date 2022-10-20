@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import rotasAluno from './alunos';
-import rotasProfessor from './professor';
+// import rotasProfessor from './professor';
 import rotasAdministrador from './administrador';
 // import rotasAutenticacao from './autenticacao';
 
@@ -12,7 +12,7 @@ rotas.get('/', (req: Request, res: Response) => {
 });
 
 rotas.use('/aluno', rotasAluno);
-rotas.use('/professor', rotasProfessor);
+// rotas.use('/professor', rotasProfessor);
 rotas.use('/administrador', rotasAdministrador);
 // rotas.use('/autenticacao', rotasAutenticacao);
 
