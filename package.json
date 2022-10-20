@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "jest",
     "start": "tsc && node ./dist/app.js",
     "lint": "eslint . --ext .ts",
