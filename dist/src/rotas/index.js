@@ -8,6 +8,7 @@ const alunos_1 = __importDefault(require("./alunos"));
 // import rotasProfessor from './professor';
 const administrador_1 = __importDefault(require("./administrador"));
 // import rotasAutenticacao from './autenticacao';
+const turmas_1 = __importDefault(require("./turmas"));
 const rotas = (0, express_1.Router)();
 rotas.get('/', (req, res) => {
     // levando usuário para a home
@@ -17,5 +18,6 @@ rotas.use('/aluno', alunos_1.default);
 // rotas.use('/professor', rotasProfessor);
 rotas.use('/administrador', administrador_1.default);
 // rotas.use('/autenticacao', rotasAutenticacao);
+rotas.use('/turmas', turmas_1.default);
 exports.default = rotas;
 //# sourceMappingURL=index.js.map
