@@ -3,6 +3,7 @@ import rotasAluno from './alunos';
 // import rotasProfessor from './professor';
 import rotasAdministrador from './administrador';
 // import rotasAutenticacao from './autenticacao';
+import rotasTurmas from './turmas';
 
 const rotas = Router();
 
@@ -15,5 +16,6 @@ rotas.use('/aluno', rotasAluno);
 // rotas.use('/professor', rotasProfessor);
 rotas.use('/administrador', rotasAdministrador);
 // rotas.use('/autenticacao', rotasAutenticacao);
+rotas.use('/turmas', rotasTurmas);
 
 export default rotas;
