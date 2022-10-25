@@ -4,17 +4,17 @@ import { PrismaClient } from '@prisma/client';
 const rotas = Router();
 const prisma = new PrismaClient();
 
-rotas.get('/reservas', async (req: Request, res: Response) => {
+rotas.get('/', async (req: Request, res: Response) => {
   const reservas = await prisma.reserva.findMany({});
   res.status(200).json(reservas);
 });
 
-rotas.post('/reservar', async (req: Request, res: Response) => {
-  const { email_aluno, id_turma } = req.body;
+rotas.post('/', async (req: Request, res: Response) => {
+  const { id_aluno, id_turma } = req.body;
   try {
     const reserva = await prisma.reserva.create({
       data: {
-        email_aluno,
+        id_aluno,
         id_turma,
       },
     });
@@ -24,11 +24,11 @@ rotas.post('/reservar', async (req: Request, res: Response) => {
   }
 });
 
-rotas.delete('/cancela_reserva', async (req: Request, res: Response) => {
-  const { email_aluno} = req.body;
+rotas.delete('/', async (req: Request, res: Response) => {
+  const { id_reserva} = req.body;
   const delete_reserva = await prisma.reserva.delete({
     where: {
-      email_aluno: email_aluno,
+      id_reserva: id_reserva,
     },
   })
   res.status(200).json(delete_reserva)

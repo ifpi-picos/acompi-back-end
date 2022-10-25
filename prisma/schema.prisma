@@ -10,25 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Usuario {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  nome  String?
-  @@map("usuarios")
-}
-
 model Aluno {
-  email_aluno String  @db.VarChar(20) @id
+  id_aluno    Int     @id @default(autoincrement())
+  email String  @db.VarChar(20)
   nome  String
   senha  String
-  // reservas Reserva[]
   @@map("aluno")
 }
 
 model Reserva{
-  email_aluno String  @db.VarChar(20) @id
-  id_turma Int
-  // aluno Aluno   @relation(fields: [email_aluno], references: [email_aluno])
+  id_reserva Int @id @unique @default(autoincrement())
+  id_aluno   Int
+  id_turma Int 
+  // id_aluno Aluno @relation(fields: [id_aluno], references: [id_aluno])
   // turma Turma   @relation(fields: [id_turma], references: [id_turma])
   @@map("reserva")
 }
