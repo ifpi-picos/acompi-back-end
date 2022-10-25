@@ -5,21 +5,21 @@ const prisma = new PrismaClient();
 const rotas = Router();
 
 rotas.get('/', async (req: Request, res: Response) => {
-  const visualizarturmas = await prisma.criarturma.findMany({});
+  const visualizarturmas = await prisma.criarTurma.findMany({});
   res.status(200).json(visualizarturmas);
 });
 
 rotas.post('/', async (req: Request, res: Response) => {
-  const { id_turma, email_professor, id_lab, data_turma, horario_inicio, horario_fim, curso } = req.body;
+  const { id_turma, email_professor, id_lab, data_turma, /*horario_inicio, horario_fim,*/ curso } = req.body;
   try {
-    const criarTurma = await prisma.criarturma.create({
+    const criarTurma = await prisma.criarTurma.create({
       data: {
         id_turma,
         email_professor,
         id_lab,
         data_turma,
-        horario_inicio,
-        horario_fim,
+        //horario_inicio,
+        //horario_fim,
         curso,
       },
     });
@@ -31,7 +31,7 @@ rotas.post('/', async (req: Request, res: Response) => {
 
 rotas.delete('/', async (req: Request, res: Response) => {
   const { email_professor } = req.body;
-  const delete_criarTurma = await prisma.criarturma.delete({
+  const delete_criarTurma = await prisma.criarTurma.delete({
     where: {
       email_professor: email_professor,
     },
