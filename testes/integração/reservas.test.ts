@@ -25,12 +25,12 @@ describe('Testando reservas dos alunos', () => {
   //   expect(response.statusCode).toBe(201);
   //   });
 
-    test('testando o get das reservas', async () => {
-      const response = await request(app).get('/reservas');
-      const reservas = response.body;
-      expect(response.statusCode).toBe(200);
-      expect(reservas.length).toBe(1);
-    });
+    // test('testando o get das reservas', async () => {
+    //   const response = await request(app).get('https://acompi-back-end-la29.onrender.com/reservas');
+    //   const reservas = response.body;
+    //   expect(response.statusCode).toBe(200);
+    //   expect(reservas.length).toBe(1);
+    // });
 
     // test('testando o delete das reservas', async () => {
     //   const novaReserva = {

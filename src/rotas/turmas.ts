@@ -29,14 +29,15 @@ rotas.post('/', async (req: Request, res: Response) => {
   }
 });
 
-rotas.delete('/', async (req: Request, res: Response) => {
-  const { email_professor } = req.body;
-  const delete_criarTurma = await prisma.criarTurma.delete({
-    where: {
-      email_professor: email_professor,
-    },
-  })
-  res.status(200).json(delete_criarTurma)
-});
+// erro ao criar o servidor novamente
+// rotas.delete('/', async (req: Request, res: Response) => {
+//   const { email_professor } = req.body;
+//   const delete_criarTurma = await prisma.criarTurma.delete({
+//     where: {
+//       email_professor: email_professor,
+//     },
+//   })
+//   res.status(200).json(delete_criarTurma)
+// });
 
 export default rotas;
