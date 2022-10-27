@@ -44,7 +44,7 @@ model Laboratorio {
 
 model Bloqueia {
   email_professor String @unique @db.VarChar(20)
-  id_lab Int
+  id_lab Int 
   horario_inicio DateTime @db.Time(0) @unique
   horario_fim DateTime @db.Time(0)
   data_inicio_bloqueia DateTime
