@@ -1,11 +1,12 @@
 import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { resolve } from 'path';
+import { type } from 'os';
 
-interface IRequest {
-  data_inicio_bloqueia: Date;
-  data_fim_bloqueia: Date
-}
+//interface IRequest {
+//  data_inicio_bloqueia: Date;
+//  data_fim_bloqueia: Date
+//}
 
 const prisma = new PrismaClient();
 const rotas = Router();
@@ -22,7 +23,7 @@ rotas.post('/bloqueia', async (req: Request, res: Response) =>  {
         data_inicio_bloqueia: data_inicio_bloqueia,
         data_fim_bloqueia: data_fim_bloqueia,
         dia_semana: dia_semana
-      } as IRequest,
+      } //as IRequest,
     });
     res.status(201).json(bloqueio);
   } catch (erro) {
