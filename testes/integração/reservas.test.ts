@@ -16,33 +16,42 @@ afterAll(async () => {
 
 
 describe('Testando reservas dos alunos', () => {
-  // test('testando o post da reserva', async () => {
-  //   const novaReserva = {
-  //     id_aluno: 1,
-  //     id_turma: 1,
-  //   };
-  //   const response = await request(app).post('/reservas').send(novaReserva);
-  //   expect(response.statusCode).toBe(201);
-  //   });
+  test('testando o post da reserva', async () => {
+    const novaReserva = {
+      id_reserva: 1,
+      id_aluno: 1,
+      id_turma: 1,
+      computador: 'sim',
+      curso: 'Informática',
+      consentimento: 'true',
 
-    // test('testando o get das reservas', async () => {
-    //   const response = await request(app).get('https://acompi-back-end-la29.onrender.com/reservas');
-    //   const reservas = response.body;
-    //   expect(response.statusCode).toBe(200);
-    //   expect(reservas.length).toBe(1);
-    // });
+    };
+    const response = await request(app).post('/reservas').send(novaReserva);
+    expect(response.statusCode).toBe(201);
+    });
 
-    // test('testando o delete das reservas', async () => {
-    //   const novaReserva = {
-    //   id_aluno: 2,
-    //   id_turma: 1,
-    //   };
+    test('testando o get das reservas', async () => {
+      const response = await request(app).get('/reservas');
+      const reservas = response.body;
+      expect(response.statusCode).toBe(200);
+      expect(reservas.length).toBe(1);
+    });
 
-    //   const cancelaReserva = {
-    //   id_reserva: 1,
-    //   };
-    //   let response = await request(app).post('/reservas').send(novaReserva);
-    //   response = await request(app).delete('/reservas').send(cancelaReserva);
-    //   expect(response.statusCode).toBe(200);
-    // });
+    test('testando o delete das reservas', async () => {
+      const novaReserva = {
+      id_reserva: 2,
+      id_aluno: 1,
+      id_turma: 1,
+      computador: 'sim',
+      curso: 'Informática',
+      consentimento: 'true',
+      };
+
+      const cancelaReserva = {
+      id_reserva: 2,
+      };
+      let response = await request(app).post('/reservas').send(novaReserva);
+      response = await request(app).delete('/reservas').send(cancelaReserva);
+      expect(response.statusCode).toBe(200);
+    });
 });

@@ -9,12 +9,16 @@ rotas.get('/', async (req, res) => {
     res.status(200).json(reservas);
 });
 rotas.post('/', async (req, res) => {
-    const { id_aluno, id_turma } = req.body;
+    const { id_reserva, id_aluno, id_turma, computador, curso, consentimento } = req.body;
     try {
         const reserva = await prisma.reserva.create({
             data: {
+                id_reserva,
                 id_aluno,
                 id_turma,
+                computador,
+                curso,
+                consentimento,
             },
         });
         res.status(201).json(reserva);
