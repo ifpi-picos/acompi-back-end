@@ -1,7 +1,8 @@
 import { Router, Request, Response } from 'express';
 import rotasReservas from './reservas';
-import rotasAdministrador from './administrador';
+import rotasAdministrador from './proibe-lab';
 import rotasTurmas from './turmas';
+// import rotasPbloqueia from './pbloqueia-laboratorio';
 
 const rotas = Router();
 
@@ -13,5 +14,6 @@ rotas.get('/', (req: Request, res: Response) => {
 rotas.use('/reservas', rotasReservas);
 rotas.use('/administrador', rotasAdministrador);
 rotas.use('/turmas', rotasTurmas);
+// rotas.use('/pbloqueia-laboratorio', rotasPbloqueia);
 
 export default rotas;

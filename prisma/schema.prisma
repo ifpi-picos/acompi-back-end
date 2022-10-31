@@ -34,23 +34,40 @@ model Reserva {
 }
 
 model Professor {
-  email_professor String @id @db.VarChar(20)
-  nome            String
-  senha           String
-
+  id_professor Int @id @default(autoincrement())
+  email_professor String @unique @db.VarChar(20)
+  nome String
+  senha String
   //turma CriarTurma[]
   @@map("professor")
+}
+
+model Laboratorio {
+  id_lab Int @id @unique @default(autoincrement())
+  quantidade_computadores Int
+  @@map("laboratorio")
+}
+
+model Bloqueia {
+  email_professor String @unique @db.VarChar(20)
+  id_lab Int 
+  horario_inicio DateTime? @db.Time(0) @unique
+  horario_fim DateTime? @db.Time(0)
+  data_inicio_bloqueia DateTime
+  data_fim_bloqueia DateTime
+  dia_semana String @unique @db.VarChar(20)
+  @@map("bloqueia")
 }
 
 model CriarTurma {
   id_turma Int @unique
 
-  email_professor String?   @db.VarChar(20)
-  id_lab          Int
-  data_turma      DateTime
-  horario_inicio  DateTime? @db.Time(0)
-  horario_fim     DateTime? @db.Time(0)
-  curso           String    @db.VarChar(20)
+  email_professor String? @db.VarChar(20)
+  id_lab Int
+  data_turma DateTime
+  horario_inicio DateTime?
+  horario_fim DateTime?
+  curso String @db.VarChar(20)
   Reserva         Reserva[]
   // professor Professor @relation(fields: [email_professor], references: [email_professor])
   // turma Turma   @relation(fields: [id_turma], references: [id_turma])
