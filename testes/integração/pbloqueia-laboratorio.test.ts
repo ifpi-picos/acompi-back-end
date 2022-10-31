@@ -5,12 +5,12 @@ import app from '../../src/app';
 import prisma from '../helpers/index';
 
 beforeAll(async () => {
-  const removeBloqueia = prisma.bloqueia.deleteMany();
+  const removeBloqueia = prisma.criarTurma.deleteMany();
   await prisma.$transaction([removeBloqueia]);
 });
 
 afterAll(async() => {
-  const removeBloqueia = prisma.bloqueia.deleteMany();
+  const removeBloqueia = prisma.criarTurma.deleteMany();
   await prisma.$transaction([removeBloqueia]);
   await prisma.$disconnect();
 });
