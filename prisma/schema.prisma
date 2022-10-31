@@ -11,19 +11,25 @@ datasource db {
 }
 
 model Aluno {
-  id_aluno    Int     @id @default(autoincrement())
-  email String  @db.VarChar(20)
-  nome  String
-  senha  String
+  id      Int       @id @default(autoincrement())
+  email   String    @db.VarChar(20)
+  nome    String
+  senha   String
+  estado  String    @default("ativo")
+  Reserva Reserva[]
   @@map("aluno")
 }
 
-model Reserva{
-  id_reserva Int @id @unique @default(autoincrement())
-  id_aluno   Int
-  id_turma Int 
-  // id_aluno Aluno @relation(fields: [id_aluno], references: [id_aluno])
-  // turma Turma   @relation(fields: [id_turma], references: [id_turma])
+model Reserva {
+  id_reserva    Int        @id @unique
+  id_aluno      Int
+  id_turma      Int
+  computador    String
+  curso         String
+  consentimento Boolean
+  aluno         Aluno      @relation(fields: [id_aluno], references: [id])
+  turma         CriarTurma @relation(fields: [id_turma], references: [id_turma])
+
   @@map("reserva")
 }
 
@@ -63,25 +69,26 @@ model CriarTurma {
   horario_inicio DateTime?
   horario_fim DateTime?
   curso String @db.VarChar(20)
+  Reserva         Reserva[]
   // professor Professor @relation(fields: [email_professor], references: [email_professor])
   // turma Turma   @relation(fields: [id_turma], references: [id_turma])
   @@map("criarturma")
 }
 
 model Administrador {
-  email_adm String  @unique @db.VarChar(20)
+  email_adm String @unique @db.VarChar(20)
   nome_adm  String
-  proibe_laboratorio ProibeLaboratorio []
+  //proibe_laboratorio ProibeLaboratorio []
   @@map("administrador")
 }
 
 model ProibeLaboratorio {
-  email_adm String  @unique @db.VarChar(20) @default(uuid())
-  id_lab Int @unique @default(autoincrement())
-  data_inicio DateTime
-  data_fim DateTime
-  administrador Administrador @relation(fields: [email_adm], references: [email_adm])
-  laboratorio Laboratorio @relation(fields: [id_lab], references: [id_lab])
+  //email_adm String  @unique @db.VarChar(20) @default(uuid())
+  id Int @unique @default(autoincrement())
+  data_inicio DateTime?
+  data_fim DateTime?
+  //administrador Administrador? @relation(fields: [email_adm], references: [email_adm])
+  //falta conexao tblaboratorio
   @@map("proibelaboratorio")
 }
 

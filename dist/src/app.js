@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const rotas_1 = __importDefault(require("./rotas"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
-app.use('/', rotas_1.default);
 app.listen(3000, () => console.log(`Servidor funcionando!`));
+app.use('/', rotas_1.default);
 exports.default = app;
 //# sourceMappingURL=app.js.map
