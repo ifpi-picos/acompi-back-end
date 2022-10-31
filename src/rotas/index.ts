@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import rotasReservas from './reservas';
-import rotasAdministrador from './administrador';
+import rotasAdministrador from './proibe-lab';
 import rotasTurmas from './turmas';
 // import rotasPbloqueia from './pbloqueia-laboratorio';
 
