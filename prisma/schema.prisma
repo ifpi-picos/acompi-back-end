@@ -16,7 +16,7 @@ model Aluno {
   nome    String
   senha   String
   estado  String    @default("ativo")
-  Reserva Reserva[]
+  // Reserva Reserva[]
   @@map("aluno")
 }
 
@@ -27,9 +27,8 @@ model Reserva {
   computador    String
   curso         String
   consentimento Boolean
-  aluno         Aluno      @relation(fields: [id_aluno], references: [id])
-  turma         CriarTurma @relation(fields: [id_turma], references: [id_turma])
-
+  // aluno         Aluno      @relation(fields: [id_aluno], references: [id])
+  // turma         CriarTurma @relation(fields: [id_turma], references: [id_turma])
   @@map("reserva")
 }
 
@@ -68,7 +67,7 @@ model CriarTurma {
   horario_inicio DateTime?
   horario_fim DateTime?
   curso String @db.VarChar(20)
-  Reserva         Reserva[]
+  // Reserva         Reserva[]
   // professor Professor @relation(fields: [email_professor], references: [email_professor])
   // turma Turma   @relation(fields: [id_turma], references: [id_turma])
   @@map("criarturma")
