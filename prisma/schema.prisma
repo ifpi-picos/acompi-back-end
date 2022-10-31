@@ -78,17 +78,17 @@ model CriarTurma {
 model Administrador {
   email_adm String @unique @db.VarChar(20)
   nome_adm  String
-  //proibe_laboratorio ProibeLaboratorio []
+  proibe_laboratorio ProibeLaboratorio []
   @@map("administrador")
 }
 
 model ProibeLaboratorio {
-  //email_adm String  @unique @db.VarChar(20) @default(uuid())
-  id Int @unique @default(autoincrement())
-  data_inicio DateTime?
-  data_fim DateTime?
-  //administrador Administrador? @relation(fields: [email_adm], references: [email_adm])
-  //falta conexao tblaboratorio
+  email_adm String  @unique @db.VarChar(20) @default(uuid())
+  id_lab Int
+  data_inicio DateTime
+  data_fim DateTime
+  administrador Administrador @relation(fields: [email_adm], references: [email_adm])
+  laboratorio Laboratorio @relation(fields: [id_lab], references: [id_lab])
   @@map("proibelaboratorio")
 }
 
