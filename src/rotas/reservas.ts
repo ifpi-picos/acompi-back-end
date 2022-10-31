@@ -17,9 +17,9 @@ rotas.post('/', async (req: Request, res: Response) => {
         id_reserva,
         id_aluno,
         id_turma,
-        computador,
-        curso,
-        consentimento,
+        // computador,
+        // curso,
+        // consentimento,
       },
     });
     res.status(201).json(reserva);
