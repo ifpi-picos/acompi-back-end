@@ -1,4 +1,5 @@
 import 'jest';
+import {describe, expect, test} from '@jest/globals';
 import { getMaxListeners } from 'process';
 import request from 'supertest';
 import app from '../../src/app';
@@ -15,16 +16,17 @@ afterAll(async() => {
   await prisma.$disconnect();
 });
 
-describe ('Testando bloqueio de laboratório', async() => {
+describe('Testando bloqueio de laboratório', async () => {
+  test('teste rota post', async () => {
   const novoBloqueio = {
     email_professor: 'pro@gmail.com',
     id_lab: 6,
-    horario_inicio: 0.0,
-    horario_fim: 0.0,
-    data_inicio_bloqueia: 0,
-    data_fim_bloqueia: 0,
+    horario_inicio: "16:20",
+    horario_fim: "17:20",
+    data_inicio_bloqueia: "01-11-2022",
+    data_fim_bloqueia: "01",
     dia_semana: 'Sexta',
   };
-  const response = await request(app).post('/pbloqueia-laboratorio').send(novoBloqueio);
-  expect(response.statusCode).toBe(201);
+  const response = await request(app).post('/pbloqueia-laboratorio/bloqueia').send(novoBloqueio);
+  expect(response.statusCode).toBe(201);})
 })

@@ -32,38 +32,48 @@ model Professor {
   email_professor String @unique @db.VarChar(20)
   nome String
   senha String
-  //turma CriarTurma[]
+  turma CriarTurma[]
+  bloqueia Bloqueia[]
+  //falta relação com tbadmprofessor
   @@map("professor")
 }
 
 model Laboratorio {
   id_lab Int @id @unique @default(autoincrement())
   quantidade_computadores Int
+  bloqueia Bloqueia[]
+  proibe ProibeLaboratorio[]
+  turma CriarTurma[]
   @@map("laboratorio")
 }
 
 model Bloqueia {
-  email_professor String @unique @db.VarChar(20)
+  id Int @unique @default(autoincrement()) 
+  email_professor String @db.VarChar(20)
   id_lab Int 
-  horario_inicio DateTime? @db.Time(0) @unique
+  horario_inicio DateTime? @db.Time(0)
   horario_fim DateTime? @db.Time(0)
   data_inicio_bloqueia DateTime
   data_fim_bloqueia DateTime
-  dia_semana String @unique @db.VarChar(20)
+  dia_semana String @db.VarChar(20)
+  professor Professor @relation(fields: [email_professor], references: [email_professor])
+  laboratorio Laboratorio @relation(fields: [id_lab], references: [id_lab])
+
+
   @@map("bloqueia")
 }
 
 model CriarTurma {
   id_turma Int @unique
 
-  email_professor String? @db.VarChar(20)
+  email_professor String @db.VarChar(20)
   id_lab Int
   data_turma DateTime
-  horario_inicio DateTime?
-  horario_fim DateTime?
+  horario_inicio DateTime
+  horario_fim DateTime
   curso String @db.VarChar(20)
-  // professor Professor @relation(fields: [email_professor], references: [email_professor])
-  // turma Turma   @relation(fields: [id_turma], references: [id_turma])
+  professor Professor @relation(fields: [email_professor], references: [email_professor])
+  laboratorio Laboratorio @relation(fields: [id_lab], references: [id_lab])
   @@map("criarturma")
 }
 
@@ -77,10 +87,11 @@ model Administrador {
 model ProibeLaboratorio {
   //email_adm String  @unique @db.VarChar(20) @default(uuid())
   id Int @unique @default(autoincrement())
+  id_lab Int
   data_inicio DateTime?
   data_fim DateTime?
   //administrador Administrador? @relation(fields: [email_adm], references: [email_adm])
-  //falta conexao tblaboratorio
+  laboratorio Laboratorio @relation(fields: [id_lab], references: [id_lab])
   @@map("proibelaboratorio")
 }
 
