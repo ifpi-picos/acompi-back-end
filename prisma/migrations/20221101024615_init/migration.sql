@@ -103,12 +103,6 @@ CREATE UNIQUE INDEX "administrador_email_adm_key" ON "administrador"("email_adm"
 CREATE UNIQUE INDEX "proibelaboratorio_email_adm_key" ON "proibelaboratorio"("email_adm");
 
 -- AddForeignKey
-ALTER TABLE "reserva" ADD CONSTRAINT "reserva_id_aluno_fkey" FOREIGN KEY ("id_aluno") REFERENCES "aluno"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "reserva" ADD CONSTRAINT "reserva_id_turma_fkey" FOREIGN KEY ("id_turma") REFERENCES "criarturma"("id_turma") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "proibelaboratorio" ADD CONSTRAINT "proibelaboratorio_email_adm_fkey" FOREIGN KEY ("email_adm") REFERENCES "administrador"("email_adm") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey

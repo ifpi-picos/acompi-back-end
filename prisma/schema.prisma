@@ -13,7 +13,7 @@ model Aluno {
   email   String    @db.VarChar(20)
   estado  String    @default("ativo")
   id      Int       @id @default(autoincrement())
-  reserva Reserva[] @relation("alunoToreserva")
+  // reserva Reserva[] @relation("alunoToreserva")
 
   @@map("aluno")
 }
@@ -22,11 +22,11 @@ model Reserva {
   id_turma      Int
   id_aluno      Int
   id_reserva    Int        @id @unique
-  // computador    String
+  computador    String
   consentimento Boolean
-  // curso         String
-  aluno         Aluno      @relation("alunoToreserva", fields: [id_aluno], references: [id])
-  criarturma    CriarTurma @relation("criarturmaToreserva", fields: [id_turma], references: [id_turma])
+  curso         String
+  // aluno         Aluno      @relation("alunoToreserva", fields: [id_aluno], references: [id])
+  // criarturma    CriarTurma @relation("criarturmaToreserva", fields: [id_turma], references: [id_turma])
 
   @@map("reserva")
 }
@@ -68,7 +68,7 @@ model CriarTurma {
   curso           String    @db.VarChar(20)
   horario_inicio  DateTime?
   horario_fim     DateTime?
-  reserva         Reserva[] @relation("criarturmaToreserva")
+  // reserva         Reserva[] @relation("criarturmaToreserva")
 
   @@map("criarturma")
 }
