@@ -34,7 +34,7 @@ model Professor {
   senha String
   turma CriarTurma[]
   bloqueia Bloqueia[]
-  //falta relação com tbadmprofessor
+
   @@map("professor")
 }
 
@@ -65,7 +65,6 @@ model Bloqueia {
 
 model CriarTurma {
   id_turma Int @unique
-
   email_professor String @db.VarChar(20)
   id_lab Int
   data_turma DateTime

@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "jest",
+    "test": "dotenv -e .env.test jest -i && jest",
     "start": "node ./dist/src/app.js",
     "lint": "eslint . --ext .ts",
-    "lint-and-fix": "eslint . --ext .ts --fix"
+    "lint-and-fix": "eslint . --ext .ts --fix",
+    "migratetest": "dotenv -e .env.test -- npx prisma migrate dev",
+    "migratedev": "dotenv -e .env -- npx prisma migrate dev"
   },
   "repository": {
     "type": "git",
