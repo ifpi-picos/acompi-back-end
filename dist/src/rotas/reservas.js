@@ -9,6 +9,7 @@ rotas.get('/', async (req, res) => {
     res.status(200).json(reservas);
 });
 rotas.post('/', async (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     const { id_reserva, id_aluno, id_turma, computador, curso, consentimento } = req.body;
     try {
         const reserva = await prisma.reserva.create({
