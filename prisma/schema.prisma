@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,99 +8,90 @@ datasource db {
 }
 
 model Aluno {
-  id_aluno    Int     @id @default(autoincrement())
-  email String  @db.VarChar(20)
-  nome  String
-  senha  String
+  nome     String
+  senha    String
+  email    String @db.VarChar(20)
+  id_aluno Int    @id @default(autoincrement())
+  estado  String    @default("ativo")
+  // reserva Reserva[] @relation("alunoToreserva")
   @@map("aluno")
 }
 
-model Reserva{
-  id_reserva Int @id @unique @default(autoincrement())
+model Reserva {
+  id_turma   Int
   id_aluno   Int
-  id_turma Int 
-  // id_aluno Aluno @relation(fields: [id_aluno], references: [id_aluno])
-  // turma Turma   @relation(fields: [id_turma], references: [id_turma])
+  id_reserva Int @id @unique @default(autoincrement())
+  computador    String
+  consentimento Boolean
+  curso         String
+  // aluno         Aluno      @relation("alunoToreserva", fields: [id_aluno], references: [id])
+  // criarturma    CriarTurma @relation("criarturmaToreserva", fields: [id_turma], references: [id_turma])
   @@map("reserva")
 }
 
 model Professor {
-  id_professor Int @id @default(autoincrement())
-  email_professor String @unique @db.VarChar(20)
-  nome String
-  senha String
-  turma CriarTurma[]
-  bloqueia Bloqueia[]
+  email_professor String       @unique @db.VarChar(20)
+  nome            String
+  senha           String
+  id_professor    Int          @id @default(autoincrement())
+  bloqueia        Bloqueia[]
+  turma           CriarTurma[]
 
   @@map("professor")
 }
 
 model Laboratorio {
-  id_lab Int @id @unique @default(autoincrement())
+  id_lab                  Int                 @id @unique @default(autoincrement())
   quantidade_computadores Int
-  bloqueia Bloqueia[]
-  proibe ProibeLaboratorio[]
-  turma CriarTurma[]
+  bloqueia                Bloqueia[]
+  turma                   CriarTurma[]
+  proibe                  ProibeLaboratorio[]
+
   @@map("laboratorio")
 }
 
 model Bloqueia {
-  id Int @unique @default(autoincrement()) 
-  email_professor String @db.VarChar(20)
-  id_lab Int 
-  horario_inicio DateTime? @db.Time(0)
-  horario_fim DateTime? @db.Time(0)
+  email_professor      String      @db.VarChar(20)
+  id_lab               Int
+  horario_inicio       DateTime?   @db.Time(0)
+  horario_fim          DateTime?   @db.Time(0)
   data_inicio_bloqueia DateTime
-  data_fim_bloqueia DateTime
-  dia_semana String @db.VarChar(20)
-  professor Professor @relation(fields: [email_professor], references: [email_professor])
-  laboratorio Laboratorio @relation(fields: [id_lab], references: [id_lab])
-
+  data_fim_bloqueia    DateTime
+  dia_semana           String      @db.VarChar(20)
+  id                   Int         @unique @default(autoincrement())
+  professor            Professor   @relation(fields: [email_professor], references: [email_professor])
+  laboratorio          Laboratorio @relation(fields: [id_lab], references: [id_lab])
 
   @@map("bloqueia")
 }
 
 model CriarTurma {
-  id_turma Int @unique
-  email_professor String @db.VarChar(20)
-  id_lab Int
-  data_turma DateTime
-  horario_inicio DateTime
-  horario_fim DateTime
-  curso String @db.VarChar(20)
-  professor Professor @relation(fields: [email_professor], references: [email_professor])
-  laboratorio Laboratorio @relation(fields: [id_lab], references: [id_lab])
+  id_turma        Int         @unique
+  email_professor String      @db.VarChar(20)
+  id_lab          Int
+  data_turma      DateTime
+  curso           String      @db.VarChar(20)
+  horario_inicio  DateTime
+  horario_fim     DateTime
+  professor       Professor   @relation(fields: [email_professor], references: [email_professor])
+  laboratorio     Laboratorio @relation(fields: [id_lab], references: [id_lab])
+  // reserva         Reserva[] @relation("criarturmaToreserva")
   @@map("criarturma")
 }
 
 model Administrador {
-  email_adm String  @unique @db.VarChar(20)
+  email_adm String @unique @db.VarChar(20)
   nome_adm  String
-  //proibe_laboratorio ProibeLaboratorio []
+
   @@map("administrador")
 }
 
 model ProibeLaboratorio {
-  //email_adm String  @unique @db.VarChar(20) @default(uuid())
-  id Int @unique @default(autoincrement())
-  id_lab Int
   data_inicio DateTime?
-  data_fim DateTime?
-  //administrador Administrador? @relation(fields: [email_adm], references: [email_adm])
+  data_fim    DateTime?
+  id_lab      Int
+  id          Int         @unique @default(autoincrement())
   laboratorio Laboratorio @relation(fields: [id_lab], references: [id_lab])
+
   @@map("proibelaboratorio")
 }
-
-// model Turma{
-//   id_turma Int @id @default(autoincrement())
-//   email_professor String  @db.VarChar(20) @id
-//   id_lab Int
-//   data_turma DateTime
-//   horario_inicio DateTime?  @db.Time(0)
-//   horario_fim DateTime?  @db.Time(0)
-//   curso_professor String  @db.VarChar(20)
-//   Professor professor   @relation(fields: [email_professor], references: [email_professor])
-//   lab lab   @relation(fields: [id_lab], references: [id_lab])
-//   reservas Reserva[]
-//   @@map("turma")
-// }
