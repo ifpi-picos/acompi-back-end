@@ -20,11 +20,11 @@ model Aluno {
 model Reserva {
   id_turma   Int
   id_aluno   Int 
-  id_reserva Int @unique @default(autoincrement())
+  id_reserva Int @id @default(autoincrement())
   computador    String
   consentimento Boolean
   curso         String
-  @@id([id_aluno, id_reserva, id_turma])
+  @@unique([id_reserva,id_aluno,id_turma])
   // aluno         Aluno      @relation("alunoToreserva", fields: [id_aluno], references: [id])
   // criarturma    CriarTurma @relation("criarturmaToreserva", fields: [id_turma], references: [id_turma])
   @@map("reserva")
