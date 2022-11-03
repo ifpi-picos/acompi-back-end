@@ -19,8 +19,8 @@ model Aluno {
 
 model Reserva {
   id_turma   Int
-  id_aluno   Int @unique
-  id_reserva Int @default(autoincrement())
+  id_aluno   Int 
+  id_reserva Int @unique @default(autoincrement())
   computador    String
   consentimento Boolean
   curso         String
