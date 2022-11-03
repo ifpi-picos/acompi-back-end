@@ -12,20 +12,18 @@ model Aluno {
   senha    String
   email    String @db.VarChar(20)
   id_aluno Int    @id @default(autoincrement())
-  estado  String    @default("ativo")
-  // reserva Reserva[] @relation("alunoToreserva")
+  estado   String @default("ativo")
+
   @@map("aluno")
 }
 
 model Reserva {
   id_turma   Int
-  id_aluno   Int 
+  id_aluno   Int
   id_reserva Int @unique @default(autoincrement())
-  computador    String
-  curso         String
+  computador String
+  curso      String
   @@id([id_reserva,id_aluno,id_turma])
-  // aluno         Aluno      @relation("alunoToreserva", fields: [id_aluno], references: [id])
-  // criarturma    CriarTurma @relation("criarturmaToreserva", fields: [id_turma], references: [id_turma])
   @@map("reserva")
 }
 
@@ -75,7 +73,7 @@ model CriarTurma {
   horario_fim     DateTime
   professor       Professor   @relation(fields: [email_professor], references: [email_professor])
   laboratorio     Laboratorio @relation(fields: [id_lab], references: [id_lab])
-  // reserva         Reserva[] @relation("criarturmaToreserva")
+
   @@map("criarturma")
 }
 

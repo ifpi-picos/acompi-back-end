@@ -10,11 +10,10 @@ rotas.get('/', async (req: Request, res: Response) => {
 });
 
 rotas.post('/', async (req: Request, res: Response) => {
-  const { id_reserva, id_aluno, id_turma, computador, curso} = req.body;
+  const { id_aluno, id_turma, computador, curso} = req.body;
   try {
     const reserva = await prisma.reserva.create({
       data: {
-        id_reserva,
         id_aluno,
         id_turma,
         computador,
@@ -28,7 +27,7 @@ rotas.post('/', async (req: Request, res: Response) => {
 });
 
 rotas.delete('/', async (req: Request, res: Response) => {
-  const { id_reserva} = req.body;
+  const { id_reserva, id_aluno, id_turma} = req.body;
   const delete_reserva = await prisma.reserva.delete({
     where: {
       id_reserva: id_reserva,
