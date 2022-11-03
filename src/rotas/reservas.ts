@@ -27,13 +27,10 @@ rotas.post('/', async (req: Request, res: Response) => {
 });
 
 rotas.delete('/', async (req: Request, res: Response) => {
-  const {id_aluno, id_turma} = req.body;
+  const {id_reserva} = req.body;
   const delete_reserva = await prisma.reserva.delete({
     where: {
-      aluno_turma: {
-        id_aluno: id_aluno,
-        id_turma: id_turma
-      }
+      id_reserva:id_reserva,
     },
   })
   res.status(200).json(delete_reserva)

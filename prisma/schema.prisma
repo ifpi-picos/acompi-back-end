@@ -20,6 +20,7 @@ model Aluno {
 model Reserva {
   id_turma   Int
   id_aluno   Int
+  id_reserva Int @id @default(autoincrement())
   computador String
   curso      String
   @@unique([id_aluno,id_turma], name: "aluno_turma")
