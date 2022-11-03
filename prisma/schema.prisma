@@ -22,7 +22,6 @@ model Reserva {
   id_aluno   Int 
   id_reserva Int @unique @default(autoincrement())
   computador    String
-  consentimento Boolean
   curso         String
   @@id([id_reserva,id_aluno,id_turma])
   // aluno         Aluno      @relation("alunoToreserva", fields: [id_aluno], references: [id])
