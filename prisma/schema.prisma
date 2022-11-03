@@ -20,10 +20,9 @@ model Aluno {
 model Reserva {
   id_turma   Int
   id_aluno   Int
-  id_reserva Int @unique @default(autoincrement())
   computador String
   curso      String
-  @@id([id_reserva,id_aluno,id_turma])
+  @@unique([id_aluno,id_turma], name: "aluno_turma")
   @@map("reserva")
 }
 
