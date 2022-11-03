@@ -9,7 +9,7 @@
     "start": "node ./dist/src/app.js",
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
-    "migratetest": "dotenv -e .env.test -- npx prisma migrate dev",
+    "migratetest": "dotenv -e .env.test -- npx prisma db push",
     "migratedev": "dotenv -e .env -- npx prisma migrate dev"
   },
   "repository": {

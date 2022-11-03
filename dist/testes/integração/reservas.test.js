@@ -17,39 +17,81 @@ afterAll(async () => {
     await index_1.default.$disconnect();
 });
 describe('Testando reservas dos alunos', () => {
-    test('testando o post da reserva', async () => {
+    test('testando o post da reserva (sucesso)', async () => {
         const novaReserva = {
             id_reserva: 1,
             id_aluno: 1,
             id_turma: 1,
             computador: 'sim',
             curso: 'Informática',
-            consentimento: 'true',
         };
         const response = await (0, supertest_1.default)(app_1.default).post('/reservas').send(novaReserva);
         expect(response.statusCode).toBe(201);
     });
-    test('testando o get das reservas', async () => {
-        const response = await (0, supertest_1.default)(app_1.default).get('/reservas');
-        const reservas = response.body;
-        expect(response.statusCode).toBe(200);
-        expect(reservas.length).toBe(1);
-    });
-    test('testando o delete das reservas', async () => {
+    test('testando o post da reserva (sucesso)', async () => {
         const novaReserva = {
             id_reserva: 2,
+            id_aluno: 2,
+            id_turma: 1,
+            computador: 'não',
+            curso: 'administração',
+        };
+        const response = await (0, supertest_1.default)(app_1.default).post('/reservas').send(novaReserva);
+        expect(response.statusCode).toBe(201);
+    });
+    test('testando o post da reserva (valores repetidos)', async () => {
+        const novaReserva = {
+            id_reserva: 1,
             id_aluno: 1,
             id_turma: 1,
             computador: 'sim',
             curso: 'Informática',
-            consentimento: 'true',
         };
-        const cancelaReserva = {
-            id_reserva: 2,
-        };
-        let response = await (0, supertest_1.default)(app_1.default).post('/reservas').send(novaReserva);
-        response = await (0, supertest_1.default)(app_1.default).delete('/reservas').send(cancelaReserva);
-        expect(response.statusCode).toBe(200);
+        const response = await (0, supertest_1.default)(app_1.default).post('/reservas').send(novaReserva);
+        expect(response.statusCode).toBe(400);
     });
+    test('testando o post da reserva (tipo errado de dado)', async () => {
+        const novaReserva = {
+            id_reserva: 2,
+            id_aluno: '2',
+            id_turma: 1,
+            computador: 'sim',
+            curso: 'Informática',
+        };
+        const response = await (0, supertest_1.default)(app_1.default).post('/reservas').send(novaReserva);
+        expect(response.statusCode).toBe(400);
+    });
+    test('testando o post da reserva (faltando dado)', async () => {
+        const novaReserva = {
+            id_reserva: 1,
+            id_aluno: 1,
+            computador: 'sim',
+            curso: 'Informática',
+        };
+        const response = await (0, supertest_1.default)(app_1.default).post('/reservas').send(novaReserva);
+        expect(response.statusCode).toBe(400);
+    });
+    // test('testando o get das reservas', async () => {
+    //   const response = await request(app).get('/reservas');
+    //   const reservas = response.body;
+    //   expect(response.statusCode).toBe(200);
+    //   expect(reservas.length).toBe(1);
+    // });
+    // test('testando o delete das reservas', async () => {
+    //   const novaReserva = {
+    //   id_reserva: 2,
+    //   id_aluno: 1,
+    //   id_turma: 1,
+    //   computador: 'sim',
+    //   curso: 'Informática',
+    //   consentimento: 'true',
+    //   };
+    //   const cancelaReserva = {
+    //   id_reserva: 2,
+    //   };
+    //   let response = await request(app).post('/reservas').send(novaReserva);
+    //   response = await request(app).delete('/reservas').send(cancelaReserva);
+    //   expect(response.statusCode).toBe(200);
+    // });
 });
 //# sourceMappingURL=reservas.test.js.map
