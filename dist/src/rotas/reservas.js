@@ -27,12 +27,17 @@ rotas.post('/', async (req, res) => {
 });
 rotas.delete('/', async (req, res) => {
     const { id_reserva } = req.body;
-    const delete_reserva = await prisma.reserva.delete({
-        where: {
-            id_reserva: id_reserva,
-        },
-    });
-    res.status(200).json(delete_reserva);
+    try {
+        const delete_reserva = await prisma.reserva.delete({
+            where: {
+                id_reserva: id_reserva,
+            },
+        });
+        res.status(200).json(delete_reserva);
+    }
+    catch (erro) {
+        res.status(400).send(erro);
+    }
 });
 exports.default = rotas;
 //# sourceMappingURL=reservas.js.map

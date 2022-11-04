@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
     "migratetest": "dotenv -e .env.test -- npx prisma db push",
-    "migratedev": "dotenv -e .env -- npx prisma migrate dev"
+    "migratedev": "dotenv -e .env -- npx prisma db push"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
   "dependencies": {
     "@prisma/client": "^4.5.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.1",
     "luxon": "^3.1.0",
     "supertest": "^6.3.0"

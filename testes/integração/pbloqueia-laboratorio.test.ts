@@ -24,7 +24,7 @@ describe('Testando bloqueio de laboratório', async () => {
     horario_inicio: "16:20",
     horario_fim: "17:20",
     data_inicio_bloqueia: "01-11-2022",
-    data_fim_bloqueia: "01",
+    data_fim_bloqueia: "01-11-1022",
     dia_semana: 'Sexta',
   };
   const response = await request(app).post('/pbloqueia-laboratorio/bloqueia').send(novoBloqueio);

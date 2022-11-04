@@ -28,12 +28,16 @@ rotas.post('/', async (req: Request, res: Response) => {
 
 rotas.delete('/', async (req: Request, res: Response) => {
   const {id_reserva} = req.body;
+  try{
   const delete_reserva = await prisma.reserva.delete({
     where: {
       id_reserva:id_reserva,
     },
   })
   res.status(200).json(delete_reserva)
+} catch (erro) {
+  res.status(400).send(erro);
+}
 });
 
 export default rotas;
