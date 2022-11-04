@@ -10,17 +10,14 @@ rotas.get('/', async (req: Request, res: Response) => {
 });
 
 rotas.post('/', async (req: Request, res: Response) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  const { id_reserva, id_aluno, id_turma, computador, curso, consentimento} = req.body;
+  const { id_aluno, id_turma, computador, curso} = req.body;
   try {
     const reserva = await prisma.reserva.create({
       data: {
-        id_reserva,
         id_aluno,
         id_turma,
         computador,
         curso,
-        consentimento,
       },
     });
     res.status(201).json(reserva);
@@ -30,10 +27,10 @@ rotas.post('/', async (req: Request, res: Response) => {
 });
 
 rotas.delete('/', async (req: Request, res: Response) => {
-  const { id_reserva} = req.body;
+  const {id_reserva} = req.body;
   const delete_reserva = await prisma.reserva.delete({
     where: {
-      id_reserva: id_reserva,
+      id_reserva:id_reserva,
     },
   })
   res.status(200).json(delete_reserva)
