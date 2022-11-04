@@ -8,34 +8,32 @@ datasource db {
 }
 
 model Aluno {
-  nome     String
-  senha    String
-  email    String @db.VarChar(20)
-  id_aluno Int    @id @default(autoincrement())
-  estado  String    @default("ativo")
-  // reserva Reserva[] @relation("alunoToreserva")
+  nome   String
+  senha  String @db.VarChar(12)
+  estado String @default("ativo")
+  email  String @unique @db.VarChar(20)
+  id     Int    @id @default(autoincrement())
+
   @@map("aluno")
 }
 
 model Reserva {
   id_turma   Int
   id_aluno   Int
-  id_reserva Int @id @unique @default(autoincrement())
-  computador    String
-  consentimento Boolean
-  curso         String
-  // aluno         Aluno      @relation("alunoToreserva", fields: [id_aluno], references: [id])
-  // criarturma    CriarTurma @relation("criarturmaToreserva", fields: [id_turma], references: [id_turma])
+  computador String
+  curso      String
+  id_reserva Int    @id @default(autoincrement())
+
+  @@unique([id_aluno, id_turma])
   @@map("reserva")
 }
 
 model Professor {
-  email_professor String       @unique @db.VarChar(20)
-  nome            String
-  senha           String
-  id_professor    Int          @id @default(autoincrement())
-  bloqueia        Bloqueia[]
-  turma           CriarTurma[]
+  nome   String
+  senha  String @db.VarChar(12)
+  estado String @default("ativo")
+  email  String @unique @db.VarChar(20)
+  id     Int    @id @default(autoincrement())
 
   @@map("professor")
 }
@@ -59,7 +57,6 @@ model Bloqueia {
   data_fim_bloqueia    DateTime
   dia_semana           String      @db.VarChar(20)
   id                   Int         @unique @default(autoincrement())
-  professor            Professor   @relation(fields: [email_professor], references: [email_professor])
   laboratorio          Laboratorio @relation(fields: [id_lab], references: [id_lab])
 
   @@map("bloqueia")
@@ -73,15 +70,16 @@ model CriarTurma {
   curso           String      @db.VarChar(20)
   horario_inicio  DateTime
   horario_fim     DateTime
-  professor       Professor   @relation(fields: [email_professor], references: [email_professor])
   laboratorio     Laboratorio @relation(fields: [id_lab], references: [id_lab])
-  // reserva         Reserva[] @relation("criarturmaToreserva")
+
   @@map("criarturma")
 }
 
 model Administrador {
-  email_adm String @unique @db.VarChar(20)
-  nome_adm  String
+  nome  String
+  senha String @db.VarChar(12)
+  email String @unique @db.VarChar(20)
+  id    Int    @id @default(autoincrement())
 
   @@map("administrador")
 }
