@@ -5,8 +5,8 @@ const client_1 = require("@prisma/client");
 const rotas = (0, express_1.Router)();
 const prisma = new client_1.PrismaClient();
 rotas.get('/', async (req, res) => {
-    const administradores = await prisma.administrador.findMany({});
-    res.status(200).json(administradores);
+    const alunos = await prisma.aluno.findMany({});
+    res.status(200).json(alunos);
 });
 rotas.post('/', async (req, res) => {
     const { nome, senha, email, id, estado } = req.body;
