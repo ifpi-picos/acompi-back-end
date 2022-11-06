@@ -8,11 +8,11 @@ datasource db {
 }
 
 model Aluno {
-  nome     String
-  senha    String  @db.VarChar(12)
+  nome   String
+  senha  String @db.VarChar(12)
+  estado String @default("ativo")
   email  String @unique
-  id Int    @id @default(autoincrement())
-  estado   String @default("ativo")
+  id     Int    @id @default(autoincrement())
 
   @@map("aluno")
 }
@@ -20,21 +20,21 @@ model Aluno {
 model Reserva {
   id_turma   Int
   id_aluno   Int
-  id_reserva Int @id @default(autoincrement())
   computador String
   curso      String
-  @@unique([id_aluno,id_turma], name: "aluno_turma")
+  id_reserva Int    @id @default(autoincrement())
+
+  @@unique([id_aluno, id_turma], name: "aluno_turma")
   @@map("reserva")
 }
 
 model Professor {
-  email String       @unique 
-  nome            String
-  senha           String  @db.VarChar(12)
-  id    Int          @id @default(autoincrement())
-  estado   String @default("ativo")
-  // bloqueia        Bloqueia[]
-  // turma           CriarTurma[]
+  nome   String
+  senha  String @db.VarChar(12)
+  estado String @default("ativo")
+  email  String @unique
+  id     Int    @id @default(autoincrement())
+
   @@map("professor")
 }
 
@@ -57,7 +57,6 @@ model Bloqueia {
   data_fim_bloqueia    DateTime
   dia_semana           String      @db.VarChar(20)
   id                   Int         @unique @default(autoincrement())
-  // professor            Professor   @relation(fields: [email_professor], references: [email_professor])
   laboratorio          Laboratorio @relation(fields: [id_lab], references: [id_lab])
 
   @@map("bloqueia")
@@ -71,17 +70,16 @@ model CriarTurma {
   curso           String      @db.VarChar(20)
   horario_inicio  DateTime
   horario_fim     DateTime
-  // professor       Professor   @relation(fields: [email_professor], references: [email_professor])
   laboratorio     Laboratorio @relation(fields: [id_lab], references: [id_lab])
 
   @@map("criarturma")
 }
 
 model Administrador {
-  email String       @unique
-  nome            String
-  senha           String  @db.VarChar(12)
-  id    Int          @id @default(autoincrement())
+  nome  String
+  senha String @db.VarChar(12)
+  email String @unique
+  id    Int    @id @default(autoincrement())
 
   @@map("administrador")
 }
