@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const client_1 = require("@prisma/client");
+const crypto = require("crypto");
 const rotas = (0, express_1.Router)();
 const prisma = new client_1.PrismaClient();
 rotas.get('/', async (req, res) => {
@@ -9,10 +10,8 @@ rotas.get('/', async (req, res) => {
     res.status(200).json(administradores);
 });
 rotas.post('/', async (req, res) => {
-    const { nome, senha, email, id } = req.body;
+    const { nome, senha, email } = req.body;
     criptografar(senha);
-    const crypto = require("crypto");
-    const cipher = crypto.createCipher();
     const DADOS_CRIPTOGRAFAR = {
         algoritmo: "aes256",
         segredo: "chaves",
@@ -25,12 +24,11 @@ rotas.post('/', async (req, res) => {
     }
     ;
     try {
-        const administrador = await prisma.aluno.create({
+        const administrador = await prisma.administrador.create({
             data: {
                 nome,
                 email,
                 senha,
-                id,
             },
         });
         res.status(201).json(administrador);

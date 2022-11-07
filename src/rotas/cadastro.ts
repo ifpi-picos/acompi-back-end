@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
-
+const crypto = require("crypto");
 const rotas = Router();
 const prisma = new PrismaClient();
 
@@ -10,12 +10,9 @@ rotas.get('/', async (req: Request, res: Response) => {
 });
 
 rotas.post('/', async (req: Request, res: Response) => {
-    const { nome, senha, email, id } = req.body;
+    const { nome, senha, email} = req.body;
     
     criptografar(senha);
-
-    const crypto = require("crypto");
-    const cipher = crypto.createCipher();
 
     const DADOS_CRIPTOGRAFAR = {
     algoritmo : "aes256",
@@ -30,12 +27,11 @@ rotas.post('/', async (req: Request, res: Response) => {
     };
     
         try {
-            const administrador = await prisma.aluno.create({
+            const administrador = await prisma.administrador.create({
                 data: {
                     nome,
                     email,
                     senha,
-                    id,
                 },
             });
 
