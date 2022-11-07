@@ -12,26 +12,26 @@ rotas.get('/', async (req: Request, res: Response) => {
 rotas.post('/', async (req: Request, res: Response) => {
     const { nome, senha, email} = req.body;
     
-    criptografar(senha);
+    // criptografar(senha);
 
-    const DADOS_CRIPTOGRAFAR = {
-    algoritmo : "aes256",
-    segredo : "chaves",
-    tipo : "hex"
-    };
+    // const DADOS_CRIPTOGRAFAR = {
+    // algoritmo : "aes256",
+    // segredo : "chaves",
+    // tipo : "hex"
+    // };
 
-    function criptografar(senha:string) {
-        const cipher = crypto.createCipher(DADOS_CRIPTOGRAFAR.algoritmo, DADOS_CRIPTOGRAFAR.segredo);
-        cipher.update(senha);
-        return cipher.final(DADOS_CRIPTOGRAFAR.tipo);
-    };
+    // function criptografar(senha:string) {
+    //     const cipher = crypto.createCipher(DADOS_CRIPTOGRAFAR.algoritmo, DADOS_CRIPTOGRAFAR.segredo);
+    //     cipher.update(senha);
+    //     return cipher.final(DADOS_CRIPTOGRAFAR.tipo);
+    // };
     
         try {
             const administrador = await prisma.administrador.create({
                 data: {
                     nome,
-                    email,
                     senha,
+                    email,
                 },
             });
 
