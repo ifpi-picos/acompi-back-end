@@ -9,7 +9,7 @@ datasource db {
 
 model Aluno {
   nome   String
-  senha  String @db.VarChar(12)
+  senha  String @db.VarChar
   estado String @default("ativo")
   email  String @unique
   id     Int    @id @default(autoincrement())
@@ -30,7 +30,7 @@ model Reserva {
 
 model Professor {
   nome   String
-  senha  String @db.VarChar(12)
+  senha  String @db.VarChar
   estado String @default("ativo")
   email  String @unique
   id     Int    @id @default(autoincrement())
@@ -77,7 +77,7 @@ model CriarTurma {
 
 model Administrador {
   nome  String
-  senha String @db.VarChar(12)
+  senha String @db.VarChar
   email String @unique
   id    Int    @id @default(autoincrement())
 

@@ -11,7 +11,19 @@ rotas.get('/', async (req: Request, res: Response) => {
 
 rotas.post('/', async (req: Request, res: Response) => {
     const { nome, senha, email, id, estado } = req.body;
-    if (email.indexOf('aluno.ifpi.edu.br') == true) {
+    
+    // const DADOS_CRIPTOGRAFAR = {
+    // algoritmo : "aes256",
+    // segredo : "chaves",
+    // tipo : "hex"
+    // };
+
+    // function criptografar(senha) {
+    //     const cipher = crypto.createCipher(DADOS_CRIPTOGRAFAR.algoritmo, DADOS_CRIPTOGRAFAR.segredo);
+    //     cipher.update(senha);
+    //     return cipher.final(DADOS_CRIPTOGRAFAR.tipo);
+    // };
+    if (email.indexOf('aluno.ifpi.edu.br') == true && senha >= 8 && senha <=12) {
         try {
             const aluno = await prisma.aluno.create({
                 data: {
