@@ -5,101 +5,60 @@ const rotas = Router();
 const prisma = new PrismaClient();
 
 rotas.get('/', async (req: Request, res: Response) => {
-    const administradores = await prisma.administrador.findMany({});
-    res.status(200).json(administradores);
+    const alunos = await prisma.aluno.findMany({});
+    res.status(200).json(alunos);
 });
 
 rotas.post('/', async (req: Request, res: Response) => {
-    const { nome, senha, email} = req.body;
-    
-    // criptografar(senha);
-
-    // const DADOS_CRIPTOGRAFAR = {
-    // algoritmo : "aes256",
-    // segredo : "chaves",
-    // tipo : "hex"
-    // };
-
-    // function criptografar(senha:string) {
-    //     const cipher = crypto.createCipher(DADOS_CRIPTOGRAFAR.algoritmo, DADOS_CRIPTOGRAFAR.segredo);
-    //     cipher.update(senha);
-    //     return cipher.final(DADOS_CRIPTOGRAFAR.tipo);
-    // };
-    
+    let { nome, senha, email } = req.body;
+        const bcrypt = require('bcryptjs');
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(senha, salt)
         try {
-            const administrador = await prisma.administrador.create({
-                data: {
-                    nome,
-                    senha,
-                    email,
-                },
-            });
+            if (email.indexOf('aluno.ifpi.edu.br') != -1 && senha.length >= 8 && senha.length <= 12 && nome != '') {
+                const aluno = await prisma.aluno.create({
+                    data: {
+                        nome,
+                        senha: hash,
+                        email,
+                    },
+                });
 
-            res.status(201).json(administrador);
+                res.status(201).json(aluno);
+            } else if (email.indexOf('ifpi.edu.br') != -1 && senha.length >= 8 && senha.length <= 12 && nome != '') {
+                const professor = await prisma.professor.create({
+                    data: {
+                        nome,
+                        senha: hash,
+                        email,
+                    },
+                });
+
+                res.status(201).json(professor);
+            }
+            else{
+                return res.status(400).send('erro no cadastro') 
+            }
         } catch (erro) {
             res.status(400).send(erro);
         }
-
-    // if (email.indexOf('aluno.ifpi.edu.br') == true && senha >= 8 && senha <=12) {
-    //     try {
-    //         const aluno = await prisma.aluno.create({
-    //             data: {
-    //                 nome,
-    //                 email,
-    //                 senha,
-    //                 id,
-    //                 estado,
-    //             },
-    //         });
-
-    //         res.status(201).json(aluno);
-    //     } catch (erro) {
-    //         res.status(400).send(erro);
-    //     }
-    // }
-    // else if (email.indexOf('ifpi.edu.br') == true) {
-    //     try {
-    //         const professor = await prisma.professor.create({
-    //             data: {
-    //                 nome,
-    //                 email,
-    //                 senha,
-    //                 id,
-    //                 estado,
-    //             },
-    //         });
-
-    //         res.status(201).json(professor);
-    //     } catch (erro) {
-    //         res.status(400).send(erro);
-    //     }
-    // }
 });
 
 rotas.delete('/', async (req: Request, res: Response) => {
-    const {id} = req.body;
-  try{
-  const delete_administrador = await prisma.administrador.delete({
-    where: {
-      id:id,
-    },
-  })
-  res.status(200).json(delete_administrador)
-} catch (erro) {
-  res.status(400).send(erro);
-}
+    const { id } = req.body;
     // if (email.indexOf('aluno.ifpi.edu.br') == true) {
-    //     try {
-    //         const delete_aluno = await prisma.aluno.delete({
-    //             where: {
-    //                 id: id,
-    //             },
-    //         })
-    //         res.status(200).json(delete_aluno)
-    //     } catch (erro) {
-    //         res.status(400).send(erro);
-    //     }
-    // } else if (email.indexOf('ifpi.edu.br') == true) {
+    try {
+        const delete_aluno = await prisma.aluno.delete({
+            where: {
+                id: id,
+            },
+        })
+        res.status(200).json(delete_aluno)
+    } catch (erro) {
+        res.status(400).send(erro);
+    }
+    // } 
+    // else if (email.indexOf('ifpi.edu.br') == true) {
     //     try {
     //         const delete_professor = await prisma.professor.delete({
     //             where: {
@@ -111,6 +70,6 @@ rotas.delete('/', async (req: Request, res: Response) => {
     //         res.status(400).send(erro);
     //     }
     // }
-    });
+});
 
 export default rotas;
