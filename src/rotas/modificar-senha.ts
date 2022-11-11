@@ -3,18 +3,22 @@
 
 // const rotas = Router();
 // const prisma = new PrismaClient();
+// const cripto = require("crypto");
 
 // rotas.post('/', async(req: Request, res:Response) => {
-//   const {email, senha, senhaa} = req.body;
+//   let {email, senha, confirmasenha} = req.body;
+//   const bcrypt = require('bcryptjs');
+//   const salt = bcrypt.genSaltSync(10);
+//   const hash = bcrypt.hashSync(senha, salt);
 //   try{
-//     const administrador = await prisma.administrador.create({
+//     const aluno = await prisma.aluno.create({
 //       data:{
 //         email,
-//         senha,
-//         senhaa,
+//         senha: hash,
+//         confirmasenha: hash,
 //       },
 //     });
-//     res.status(201).json(administrador);
+//     res.status(201).json(aluno);
 //   } catch(erro) {
 //     res.status(400).send(erro);
 //   }
