@@ -48,31 +48,25 @@ rotas.post('/', async (req: Request, res: Response) => {
 });
 
 rotas.delete('/', async (req: Request, res: Response) => {
-    const { id } = req.body;
-    // if (email.indexOf('aluno.ifpi.edu.br') == true) {
+    const { id, email } = req.body;
     try {
+        if (email.indexOf('@aluno.ifpi.edu.br') != -1) {
         const delete_aluno = await prisma.aluno.delete({
             where: {
                 id: id,
             },
         })
         res.status(200).json(delete_aluno)
-    } catch (erro) {
-        res.status(400).send(erro);
     }
-    // } 
-    // else if (email.indexOf('ifpi.edu.br') == true) {
-    //     try {
-    //         const delete_professor = await prisma.professor.delete({
-    //             where: {
-    //                 id: id,
-    //             },
-    //         })
-    //         res.status(200).json(delete_professor)
-    //     } catch (erro) {
-    //         res.status(400).send(erro);
-    //     }
-    // }
-});
+        else if (email.indexOf('@ifpi.edu.br') != -1) {
+            const delete_professor = await prisma.professor.delete({
+                where: {
+                    id: id,
+                },
+            })
+            res.status(200).json(delete_professor)
+    }} catch (erro) {
+        res.status(400).send(erro);
+}})
 
 export default rotas;
