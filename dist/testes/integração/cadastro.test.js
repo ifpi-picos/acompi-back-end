@@ -74,6 +74,15 @@ describe('Testando o cadastro', () => {
         const response = await (0, supertest_1.default)(app_1.default).post('/cadastro').send(novoCadastro);
         expect(response.statusCode).toBe(400);
     });
+    test('testando o post de cadastro com quantidade inválida de caracteres', async () => {
+        const novoCadastro = {
+            nome: 'ab',
+            senha: 'z@467VHb',
+            email: 'capic.2021118tads0270@aluno.ifpi.edu.br',
+        };
+        const response = await (0, supertest_1.default)(app_1.default).post('/cadastro').send(novoCadastro);
+        expect(response.statusCode).toBe(400);
+    });
     test('testando o post de senha inválida', async () => {
         const novoCadastro = {
             nome: 'rodrigo',

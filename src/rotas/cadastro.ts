@@ -5,11 +5,8 @@ const rotas = Router();
 const prisma = new PrismaClient();
 
 rotas.get('/', async (req: Request, res: Response) => {
-    const administrador = await prisma.administrador.findMany({});
-    const alunos = await prisma.aluno.findMany({});
     const professores = prisma.professor.findMany({});
-    const usuarios = Object.assign({}, alunos, professores);
-    res.status(200).json(usuarios);
+    res.status(200).json(professores);
 });
 
 rotas.post('/', async (req: Request, res: Response) => {
@@ -18,7 +15,7 @@ rotas.post('/', async (req: Request, res: Response) => {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(senha, salt)
         try {
-            if (email.indexOf('@aluno.ifpi.edu.br') != -1 && senha.length >= 8 && senha.length <= 12 && nome != '' && nome.length >= 3) {
+            if (email.indexOf('aluno.ifpi.edu.br') != -1 && senha.length >= 8 && senha.length <= 12 && nome != '' && nome.length >= 3) {
                 const aluno = await prisma.aluno.create({
                     data: {
                         nome,
@@ -28,7 +25,7 @@ rotas.post('/', async (req: Request, res: Response) => {
                 });
 
                 res.status(201).json(aluno);
-            } else if (email.indexOf('@ifpi.edu.br') != -1 && senha.length >= 8 && senha.length <= 12 && nome != '' && nome.length >= 3) {
+            } else if (email.indexOf('ifpi.edu.br') != -1 && senha.length >= 8 && senha.length <= 12 && nome != '' && nome.length >= 3) {
                 const professor = await prisma.professor.create({
                     data: {
                         nome,
