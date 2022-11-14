@@ -5,8 +5,10 @@ const rotas = Router();
 const prisma = new PrismaClient();
 
 rotas.get('/', async (req: Request, res: Response) => {
-    const professores = prisma.professor.findMany({});
-    res.status(200).json(professores);
+    const alunos = await prisma.aluno.findMany({});
+    const professores = await prisma.professor.findMany({});
+    const usuarios = await alunos.concat(professores)
+    res.status(200).json(usuarios);
 });
 
 rotas.post('/', async (req: Request, res: Response) => {

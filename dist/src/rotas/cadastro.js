@@ -6,8 +6,10 @@ const crypto = require("crypto");
 const rotas = (0, express_1.Router)();
 const prisma = new client_1.PrismaClient();
 rotas.get('/', async (req, res) => {
-    const professores = prisma.professor.findMany({});
-    res.status(200).json(professores);
+    const alunos = await prisma.aluno.findMany({});
+    const professores = await prisma.professor.findMany({});
+    const usuarios = await alunos.concat(professores);
+    res.status(200).json(usuarios);
 });
 rotas.post('/', async (req, res) => {
     let { nome, senha, email } = req.body;
