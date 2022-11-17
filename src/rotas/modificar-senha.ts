@@ -1,11 +1,8 @@
 import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
-import { existsSync } from 'fs';
-import { STATUS_CODES } from 'http';
-import { Hash } from 'crypto';
+import bcrypt from 'bcryptjs' ;
 const rotas = Router();
 const prisma = new PrismaClient();
-const cripto = require("crypto");
 
 rotas.get('/', async (req: Request, res: Response) => {
   const alunos = await prisma.aluno.findMany({});
@@ -16,22 +13,23 @@ rotas.get('/', async (req: Request, res: Response) => {
 
 rotas.patch('/', async(req: Request, res: Response) => {
   const {email, senha, confirmasenha} = req.body;
-  const alunos = await prisma.aluno.findMany({});
-  const professores = await prisma.professor.findMany({});
-  const bcrypt = require('bcryptjs');
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(senha, salt);
   try{
-    const usuarios = await alunos.concat(professores);
-    if (!usuarios) {
+    console.log('111111111111111111111')
+    const usuario = await prisma.aluno.findUnique({where: {email}})
+    console.log('2222222222222222222222')
+    if (!usuario) {
+      console.log('3333333333333333')
       res.status(400).send({erro: 'Usuário não cadastrado.'})
     } else {
       if (email.indexOf('aluno.ifpi.edu.br') && senha == confirmasenha) {
+        console.log('regua')
         const aluno = await prisma.aluno.update({
   data: {
     senha: hash,
   },
-  where: hash
+  where: email
 });
         res.status(201).json(aluno);
 
@@ -40,7 +38,7 @@ rotas.patch('/', async(req: Request, res: Response) => {
   data: {
     senha: hash,
   },
-  where: hash
+  where: email
 });
         res.status(201).json(professor);
       }

@@ -9,7 +9,6 @@ var cors = require('cors');
 const app = (0, express_1.default)();
 app.use(cors());
 app.use(express_1.default.json());
-app.listen(3000, () => console.log(`Servidor funcionando!`));
 app.use('/', rotas_1.default);
 exports.default = app;
 //# sourceMappingURL=app.js.map

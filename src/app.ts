@@ -8,8 +8,6 @@ app.use(cors())
 
 app.use(express.json());
 
-app.listen(3000, () => console.log(`Servidor funcionando!`));
-
 app.use('/', rotas);
 
 export default app;
