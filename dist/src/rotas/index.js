@@ -10,6 +10,7 @@ const turmas_1 = __importDefault(require("./turmas"));
 // import rotasPbloqueia from './pbloqueia-laboratorio';
 const cadastro_1 = __importDefault(require("./cadastro"));
 //import rotasModificarSenha from './modificar-senha';
+const login_1 = __importDefault(require("./login"));
 const rotas = (0, express_1.Router)();
 rotas.get('/', (req, res) => {
     // levando usuário para a home
@@ -20,6 +21,7 @@ rotas.use('/administrador', proibe_lab_1.default);
 rotas.use('/turmas', turmas_1.default);
 // rotas.use('/pbloqueia-laboratorio', rotasPbloqueia);
 rotas.use('/cadastro', cadastro_1.default);
+rotas.use('/login', login_1.default);
 //rotas.use('/modificar-senha', rotasModificarSenha);
 exports.default = rotas;
 //# sourceMappingURL=index.js.map
