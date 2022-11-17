@@ -8,7 +8,7 @@ const prisma = new PrismaClient;
 const app = Router();
 
 app.post('/', async (req: Request, res: Response) => {
-
+    console.log('fjbhdfjbhdflkgkdjghfghdfjghdjhgfghguhepgijengoerhgerhogierg')
     try {
 
 const {email, senha} = req.body;

@@ -10,12 +10,10 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient;
 const app = (0, express_1.Router)();
 app.post('/', async (req, res) => {
+    console.log('fjbhdfjbhdflkgkdjghfghdfjghdjhgfghguhepgijengoerhgerhogierg');
     try {
         const { email, senha } = req.body;
-        console.log(email);
-        console.log(senha);
         const usuario = await prisma.aluno.findFirst({ where: { email: email } });
-        console.log(usuario?.senha);
         if (!usuario)
             throw new Error('Dados incorretos!');
         if (await !(0, bcryptjs_1.compareSync)(senha, usuario.senha))
