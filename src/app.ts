@@ -19,7 +19,7 @@ app.use(express.json());
 app.listen(3000, () => console.log(`Servidor funcionando!`));
 
 app.all('/*', (req: Request, res: Response, next: NextFunction) =>{
-    const publicRoutes = ['/login', '/cadastro'];
+    const publicRoutes = ['/login', '/cadastro', '/modificar-senha'];
     for (let i = 0; i < publicRoutes.length; i +=1) {
         if (req.path === publicRoutes[i]) {
             return next();

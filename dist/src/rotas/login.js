@@ -14,7 +14,7 @@ app.post('/', async (req, res) => {
         const { email, senha } = req.body;
         console.log(email);
         console.log(senha);
-        const usuario = await prisma.professor.findFirst({ where: { email: email } });
+        const usuario = await prisma.aluno.findFirst({ where: { email: email } });
         console.log(usuario?.senha);
         if (!usuario)
             throw new Error('Dados incorretos!');

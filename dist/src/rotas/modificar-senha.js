@@ -16,8 +16,8 @@ rotas.get('/', async (req, res) => {
 });
 rotas.patch('/', async (req, res) => {
     const { email, senha, confirmasenha } = req.body;
-    const salt = bcryptjs_1.default.genSaltSync(10);
-    const hash = bcryptjs_1.default.hashSync(senha, salt);
+    const salt = await bcryptjs_1.default.genSaltSync(10);
+    const hash = await bcryptjs_1.default.hashSync(senha, salt);
     try {
         console.log('111111111111111111111');
         const usuario = await prisma.aluno.findUnique({ where: { email } });
@@ -33,7 +33,7 @@ rotas.patch('/', async (req, res) => {
                     data: {
                         senha: hash,
                     },
-                    where: email
+                    where: { email }
                 });
                 res.status(201).json(aluno);
             }
