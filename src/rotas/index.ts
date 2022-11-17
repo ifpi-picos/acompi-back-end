@@ -5,6 +5,8 @@ import rotasTurmas from './turmas';
 // import rotasPbloqueia from './pbloqueia-laboratorio';
 import rotasCadastro from './cadastro';
 import rotasModificarSenha from './modificar-senha';
+//import rotasModificarSenha from './modificar-senha';
+import rotasLogin from './login';
 
 const rotas = Router();
 
@@ -19,5 +21,7 @@ rotas.use('/turmas', rotasTurmas);
 // rotas.use('/pbloqueia-laboratorio', rotasPbloqueia);
 rotas.use('/cadastro', rotasCadastro);
 rotas.use('/modificar-senha', rotasModificarSenha);
+rotas.use('/login', rotasLogin);
+//rotas.use('/modificar-senha', rotasModificarSenha);
 
 export default rotas;
