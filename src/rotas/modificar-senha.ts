@@ -13,8 +13,8 @@ rotas.get('/', async (req: Request, res: Response) => {
 
 rotas.patch('/', async(req: Request, res: Response) => {
   const {email, senha, confirmasenha} = req.body;
-  const salt = await bcrypt.genSaltSync(10);
-  const hash = await bcrypt.hashSync(senha, salt);
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(senha, salt);
   try{
     console.log('111111111111111111111')
     const usuario = await prisma.aluno.findUnique({where: {email}})
@@ -31,6 +31,7 @@ rotas.patch('/', async(req: Request, res: Response) => {
   },
   where: {email}
 });
+console.log(aluno)
         res.status(201).json(aluno);
 
       } else if (email.indexOf('ifpi.edu.br') && senha == confirmasenha){
@@ -41,8 +42,7 @@ rotas.patch('/', async(req: Request, res: Response) => {
   where: email
 });
         res.status(201).json(professor);
-      }
-      else{
+      }else{
         return res.status(400).send('erro no cadastro')
       }
     }

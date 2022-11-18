@@ -9,7 +9,7 @@ const app = express();
 app.use(cors({
     origin: '*', // url do front
     credentials: true,
-    methods: 'GET, PUT, POST, OPTIONS, DELETE',
+    methods: 'GET, PUT, POST, OPTIONS, DELETE, PATCH',
 }))
 
 app.use(cookieParser());

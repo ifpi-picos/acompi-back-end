@@ -12,7 +12,7 @@ const app = (0, express_1.default)();
 app.use(cors({
     origin: '*',
     credentials: true,
-    methods: 'GET, PUT, POST, OPTIONS, DELETE',
+    methods: 'GET, PUT, POST, OPTIONS, DELETE, PATCH',
 }));
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
