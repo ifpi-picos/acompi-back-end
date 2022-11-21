@@ -5,32 +5,31 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient;
 
-const app = Router();
+const rotas = Router();
 
-app.post('/', async (req: Request, res: Response) => {
-
+rotas.post('/', async (req: Request, res: Response) => {
+    console.log('fjbhdfjbhdflkgkdjghfghdfjghdjhgfghguhepgijengoerhgerhogierg') 
     try {
+    
+    const { email, senha } = req.body;
+    console.log('fjbhdfjbhdflkgkdjghfghdfjghdjhgfghguhepgijengoerhgerhogierg') 
+    const usuario = await prisma.aluno.findFirst({where: {email}});
+    
 
-const {email, senha} = req.body;
-console.log(email)
-console.log(senha)
-const usuario = await prisma.professor.findFirst({where: {email: email}})
-console.log(usuario?.senha)
-
-if (!usuario) throw new Error ('Dados incorretos!');
-
-if(await !compareSync(senha, usuario.senha)) throw Error("Senha incorreta!");
-
-const token = jwt.sign({ id: usuario.id }, 'dkfjhsflvhdfjlhdfjkghlfjgldjfljdhflh', { expiresIn: "1d" });
-
-res.cookie('token', token, { maxAge: 5000000, httpOnly: true, sameSite: false, secure: true})
-
-return res.status(201).json('Login efetuado com sucesso!');
+    if (!usuario) throw new Error ('Dados incorretos!');
+    
+    if(!compareSync(senha, usuario.senha)) throw Error("Senha incorreta!");
+    
+    const token = jwt.sign({ id: usuario.id }, 'dkfjhsflvhdfjlhdfjkghlfjgldjfljdhflh', { expiresIn: "1d" });
+    console.log(usuario)
+    res.cookie('token', token, { maxAge: 5000000, httpOnly: true, sameSite: 'none', secure: false})
+    console.log('fjbhdfjbhdflkgkdjghfghdfjghdjhgfghguhepgijengoerhgerhogierg') 
+    return res.status(201).json('Login efetuado com sucesso!');
 
 
-}catch (error: any) {
+} catch (error: any) {
         res.status(400).json(error.message)
 }
 });
 
-export default app;
+export default rotas;

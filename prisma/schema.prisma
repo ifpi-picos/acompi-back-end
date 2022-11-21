@@ -24,7 +24,7 @@ model Reserva {
   curso      String
   id_reserva Int    @id @default(autoincrement())
 
-  @@unique([id_aluno, id_turma], name: "aluno_turma")
+  @@unique([id_aluno, id_turma])
   @@map("reserva")
 }
 

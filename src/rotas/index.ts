@@ -14,7 +14,7 @@ rotas.get('/', (req: Request, res: Response) => {
   // levando usuário para a home
   res.send('Servidor rodando');
 });
-
+console.log('email')
 rotas.use('/reservas', rotasReservas);
 rotas.use('/administrador', rotasAdministrador);
 rotas.use('/turmas', rotasTurmas);

@@ -12,13 +12,13 @@ const app = (0, express_1.default)();
 app.use(cors({
     origin: '*',
     credentials: true,
-    methods: 'GET, PUT, POST, OPTIONS, DELETE',
+    methods: 'GET, PUT, POST, OPTIONS, DELETE, PATCH',
 }));
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
 app.listen(3000, () => console.log(`Servidor funcionando!`));
 app.all('/*', (req, res, next) => {
-    const publicRoutes = ['/login', '/cadastro'];
+    const publicRoutes = ['/login', '/cadastro', '/modificar-senha'];
     for (let i = 0; i < publicRoutes.length; i += 1) {
         if (req.path === publicRoutes[i]) {
             return next();

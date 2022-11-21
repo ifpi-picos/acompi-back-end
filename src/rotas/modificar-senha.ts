@@ -29,8 +29,9 @@ rotas.patch('/', async(req: Request, res: Response) => {
   data: {
     senha: hash,
   },
-  where: email
+  where: {email}
 });
+console.log(aluno)
         res.status(201).json(aluno);
 
       } else if (email.indexOf('ifpi.edu.br') && senha == confirmasenha){
@@ -41,8 +42,7 @@ rotas.patch('/', async(req: Request, res: Response) => {
   where: email
 });
         res.status(201).json(professor);
-      }
-      else{
+      }else{
         return res.status(400).send('erro no cadastro')
       }
     }

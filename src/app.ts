@@ -9,7 +9,7 @@ const app = express();
 app.use(cors({
     origin: '*', // url do front
     credentials: true,
-    methods: 'GET, PUT, POST, OPTIONS, DELETE',
+    methods: 'GET, PUT, POST, OPTIONS, DELETE, PATCH',
 }))
 
 app.use(cookieParser());
@@ -19,7 +19,7 @@ app.use(express.json());
 app.listen(3000, () => console.log(`Servidor funcionando!`));
 
 app.all('/*', (req: Request, res: Response, next: NextFunction) =>{
-    const publicRoutes = ['/login', '/cadastro'];
+    const publicRoutes = ['/login', '/cadastro', '/modificar-senha'];
     for (let i = 0; i < publicRoutes.length; i +=1) {
         if (req.path === publicRoutes[i]) {
             return next();
