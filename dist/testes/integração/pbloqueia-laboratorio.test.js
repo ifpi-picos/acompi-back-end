@@ -1,21 +1,19 @@
+"use strict";
 // import 'jest';
 // import {describe, expect, test} from '@jest/globals';
 // import { getMaxListeners } from 'process';
 // import request from 'supertest';
 // import app from '../../src/app';
 // import prisma from '../helpers/index';
-
 // beforeAll(async () => {
 //   const removeBloqueia = prisma.criarTurma.deleteMany();
 //   await prisma.$transaction([removeBloqueia]);
 // });
-
 // afterAll(async() => {
 //   const removeBloqueia = prisma.criarTurma.deleteMany();
 //   await prisma.$transaction([removeBloqueia]);
 //   await prisma.$disconnect();
 // });
-
 // describe('Testando bloqueio de laboratório', async () => {
 //   test('teste rota post', async () => {
 //   const novoBloqueio = {
@@ -30,3 +28,4 @@
 //   const response = await request(app).post('/pbloqueia-laboratorio/bloqueia').send(novoBloqueio);
 //   expect(response.statusCode).toBe(201);})
 // })
+//# sourceMappingURL=pbloqueia-laboratorio.test.js.map

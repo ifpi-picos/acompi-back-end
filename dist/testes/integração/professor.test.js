@@ -1,19 +1,17 @@
+"use strict";
 // import 'jest';
 // import request from 'supertest';
 // import app from '../../src/app';
 // import prisma from '../helpers/index';
-
 // beforeAll(async () => {
 //   const removeCriarTurmas = prisma.criarTurma.deleteMany();
 //   await prisma.$transaction([removeCriarTurmas]);
 // });
-
 // afterAll(async() => {
 //   const removeCriarTurmas = prisma.criarTurma.deleteMany();
 //   await prisma.$transaction([removeCriarTurmas]);
 //   await prisma.$disconnect();
 // });
-
 // describe('Testando criar turmas do professor', () => {
 //   test('Testando get de criar turma', async () => {
 //     const response = await request(app).get('/professor/criarturma');
@@ -21,7 +19,6 @@
 //     expect(response.statusCode).toBe(200);
 //     expect(criarturma.length).toBe(1);
 //   });
-
 //   describe('Testando post de criar turma', async() => {
 //     const novaTurma = {
 //       id_turma: 1,
@@ -35,7 +32,6 @@
 //     const response = await request(app).post('/turmas').send(novaTurma);
 //     expect(response.statusCode).toBe(201);
 //   });
-
 //   test('Testando o cancelar turma', async() => {
 //     const novaTurma = {
 //       id_turma: 1,
@@ -46,7 +42,6 @@
 //       horario_fim: 1600,
 //       curso: 'Análise e Desenvolvimento de Sistemas',
 //     };
-
 //     const cancelarCriarTurma = {
 //       email_professor: 'testeP@gmail.com',
 //     };
@@ -55,3 +50,4 @@
 //     expect(response.statusCode).toBe(200);
 //   })
 // });
+//# sourceMappingURL=professor.test.js.map

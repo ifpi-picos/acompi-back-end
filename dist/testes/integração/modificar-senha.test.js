@@ -1,8 +1,8 @@
+"use strict";
 // import 'jest';
 // import request from 'supertest';
 // import app from '../../src/app';
 // import prisma from '../helpers/index';
-
 // describe('Teste de modificar senha', () => {
 //   test('Testando o patch de modificar senha de um  aluno', async() => {
 //     const newUser = {
@@ -10,7 +10,6 @@
 //       senha: "One.π.ece",
 //       nome: "eu"
 //     }
-   
 //     const response1 = await request(app).post('/cadastro').send(newUser)
 //     expect(response1.statusCode).toBe(201);
 //     const novaSenha = {
@@ -22,3 +21,4 @@
 //     expect(response2.statusCode).toBe(201);
 //   });
 // });
+//# sourceMappingURL=modificar-senha.test.js.map

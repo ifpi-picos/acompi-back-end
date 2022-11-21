@@ -1,20 +1,17 @@
+"use strict";
 // import 'jest';
 // import request from 'supertest';
 // import app from '../../src/app';
 // import prisma from '../helpers/index';
-
 // beforeAll(async () => {
 //   const removeReservas= prisma.reserva.deleteMany();
 //   await prisma.$transaction([removeReservas]);
 // });
-
 // afterAll(async () => {
 //   const removeReservas = prisma.reserva.deleteMany();
 //   await prisma.$transaction([removeReservas]);
 //   await prisma.$disconnect();
 // });
-
-
 // describe('Testando reservas dos alunos', () => {
 //   test('testando o post da reserva (sucesso)', async () => {
 //     const novaReserva = {
@@ -27,7 +24,6 @@
 //     const response = await request(app).post('/reservas').send(novaReserva);
 //     expect(response.statusCode).toBe(201);
 //     });
-
 //     test('testando o post da reserva (sucesso)', async () => {
 //       const novaReserva = {
 //         id_reserva: 2,
@@ -50,7 +46,6 @@
 //       const response = await request(app).post('/reservas').send(novaReserva);
 //       expect(response.statusCode).toBe(400);
 //       });
-
 //       test('testando o post da reserva (tipo errado de dado)', async () => {
 //         const novaReserva = {
 //           id_reserva: 2,
@@ -62,7 +57,6 @@
 //         const response = await request(app).post('/reservas').send(novaReserva);
 //         expect(response.statusCode).toBe(400);
 //         });
-
 //       test('testando o post da reserva (faltando dado)', async () => {
 //         const novaReserva = {
 //           id_reserva: 1,
@@ -79,7 +73,6 @@
 //     //   expect(response.statusCode).toBe(200);
 //     //   expect(reservas.length).toBe(1);
 //     // });
-
 //     // test('testando o delete das reservas', async () => {
 //     //   const novaReserva = {
 //     //   id_reserva: 2,
@@ -89,7 +82,6 @@
 //     //   curso: 'Informática',
 //     //   consentimento: 'true',
 //     //   };
-
 //     //   const cancelaReserva = {
 //     //   id_reserva: 2,
 //     //   };
@@ -98,3 +90,4 @@
 //     //   expect(response.statusCode).toBe(200);
 //     // });
 // });
+//# sourceMappingURL=reservas.test.js.map

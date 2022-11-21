@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
+import internal from 'stream';
 const crypto = require("crypto");
 const rotas = Router();
 const prisma = new PrismaClient();
