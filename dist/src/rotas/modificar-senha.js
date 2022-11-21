@@ -19,23 +19,18 @@ rotas.patch('/', async (req, res) => {
     const salt = bcryptjs_1.default.genSaltSync(10);
     const hash = bcryptjs_1.default.hashSync(senha, salt);
     try {
-        console.log('111111111111111111111');
         const usuario = await prisma.aluno.findUnique({ where: { email } });
-        console.log('2222222222222222222222');
         if (!usuario) {
-            console.log('3333333333333333');
-            res.status(400).send({ erro: 'Usuário não cadastrado.' });
+            throw new Error('Usuário não cadastrado');
         }
         else {
             if (email.indexOf('aluno.ifpi.edu.br') && senha == confirmasenha) {
-                console.log('regua');
                 const aluno = await prisma.aluno.update({
                     data: {
                         senha: hash,
                     },
                     where: { email }
                 });
-                console.log(aluno);
                 res.status(201).json(aluno);
             }
             else if (email.indexOf('ifpi.edu.br') && senha == confirmasenha) {
@@ -48,12 +43,12 @@ rotas.patch('/', async (req, res) => {
                 res.status(201).json(professor);
             }
             else {
-                return res.status(400).send('erro no cadastro');
+                return res.status(400).json({ message: 'erro no cadastro' });
             }
         }
     }
     catch (erro) {
-        res.status(400).send(erro);
+        res.status(400).json(erro.message);
     }
 });
 exports.default = rotas;
