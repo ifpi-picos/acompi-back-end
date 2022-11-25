@@ -8,11 +8,13 @@ datasource db {
 }
 
 model Aluno {
-  nome   String
-  senha  String @db.VarChar
-  estado String @default("ativo")
-  email  String @unique
-  id     Int    @id @default(autoincrement())
+  nome              String
+  senha             String  @db.VarChar
+  estado            String  @default("ativo")
+  email             String  @unique
+  id                Int     @id @default(autoincrement())
+  status            Boolean @default(false)
+  codigoConfirmacao String  @unique
 
   @@map("aluno")
 }
@@ -29,11 +31,13 @@ model Reserva {
 }
 
 model Professor {
-  nome   String
-  senha  String @db.VarChar
-  estado String @default("ativo")
-  email  String @unique
-  id     Int    @id @default(autoincrement())
+  nome              String
+  senha             String  @db.VarChar
+  estado            String  @default("ativo")
+  email             String  @unique
+  id                Int     @id @default(autoincrement())
+  status            Boolean @default(false)
+  codigoConfirmacao String  @unique
 
   @@map("professor")
 }
