@@ -8,6 +8,7 @@ datasource db {
 }
 
 model Aluno {
+<<<<<<< HEAD
   nome   String
   senha  String @db.VarChar
   estado String @default("ativo")
@@ -16,6 +17,16 @@ model Aluno {
   status Boolean?
   codigoConfirmacao String @unique
   @@unique([email,status])
+=======
+  nome              String
+  senha             String  @db.VarChar
+  estado            String  @default("ativo")
+  email             String  @unique
+  id                Int     @id @default(autoincrement())
+  status            Boolean @default(false)
+  codigoConfirmacao String  @unique
+
+>>>>>>> b519b8072ae0df4ea10cf532602a0dcb3d486569
   @@map("aluno")
 }
 
@@ -31,6 +42,7 @@ model Reserva {
 }
 
 model Professor {
+<<<<<<< HEAD
   nome   String
   senha  String @db.VarChar
   estado String @default("ativo")
@@ -39,6 +51,16 @@ model Professor {
   status Boolean?
   codigoConfirmacao String @unique
   @@unique([email,status])
+=======
+  nome              String
+  senha             String  @db.VarChar
+  estado            String  @default("ativo")
+  email             String  @unique
+  id                Int     @id @default(autoincrement())
+  status            Boolean @default(false)
+  codigoConfirmacao String  @unique
+
+>>>>>>> b519b8072ae0df4ea10cf532602a0dcb3d486569
   @@map("professor")
 }
 

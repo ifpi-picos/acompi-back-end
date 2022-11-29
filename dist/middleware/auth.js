@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function verifyJWT(req, res, next) {
     const token = req.cookies ? req.cookies.token : null;
+    console.log(token);
     if (!token) {
         return res.status(403).send("Token não encontrado!");
     }
