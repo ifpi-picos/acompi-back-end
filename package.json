@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "tsc && node ./dist/src/app.js",
     "build": "tsc",
     "test": "dotenv -e .env.test jest -i && jest",
     "start": "node ./dist/src/app.js",
@@ -37,6 +38,7 @@
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
     "luxon": "^3.1.0",
+    "nodemailer": "^6.8.0",
     "supertest": "^6.3.0"
   },
   "devDependencies": {

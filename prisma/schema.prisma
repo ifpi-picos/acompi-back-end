@@ -11,9 +11,11 @@ model Aluno {
   nome   String
   senha  String @db.VarChar
   estado String @default("ativo")
-  email  String @unique
+  email  String 
   id     Int    @id @default(autoincrement())
-
+  status Boolean?
+  codigoConfirmacao String @unique
+  @@unique([email,status])
   @@map("aluno")
 }
 
@@ -32,9 +34,11 @@ model Professor {
   nome   String
   senha  String @db.VarChar
   estado String @default("ativo")
-  email  String @unique
+  email  String 
   id     Int    @id @default(autoincrement())
-
+  status Boolean?
+  codigoConfirmacao String @unique
+  @@unique([email,status])
   @@map("professor")
 }
 
