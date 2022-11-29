@@ -18,7 +18,6 @@ rotas.get('/', async (req, res) => {
 });
 rotas.get('/:token', async (req, res) => {
     const { token } = req.params;
-    console.log('token: ', token);
     const aluno = await prisma.aluno.findUnique({
         where: {
             codigoConfirmacao: token,
@@ -29,8 +28,6 @@ rotas.get('/:token', async (req, res) => {
             codigoConfirmacao: token,
         },
     });
-    console.log('aluno:', aluno);
-    console.log('professor:', professor);
     if (aluno) {
         const updateUser = await prisma.aluno.update({
             where: {
@@ -91,7 +88,6 @@ rotas.post('/', async (req, res) => {
     const bcrypt = require('bcryptjs');
     const salt = bcrypt.genSaltSync(20);
     const hash = bcrypt.hashSync(senha, salt);
-    console.log('chegou no gerastring');
     // Gerando token de validação do email
     function geraStringAleatoria(tamanho) {
         var stringAleatoria = '';
@@ -143,7 +139,10 @@ rotas.post('/', async (req, res) => {
             }
         });
         console.log(aluno);
+        console.log(professor);
+        console.log(req.body);
         if (email.indexOf('aluno.ifpi.edu.br') != -1 && senha.length >= 8 && senha.length <= 12 && nome != '' && nome.length >= 3 && !aluno) {
+            console.log('erro no create');
             const user = await prisma.aluno.create({
                 data: {
                     nome,
