@@ -145,7 +145,7 @@ rotas.post('/', async (req: Request, res: Response) => {
             // enviando o email de confirmação
             let info = await transporter.sendMail({
                 from: 'acompi <acompi110@gmail.com>', // sender address
-                to: 'capic.2021118tads0149@aluno.ifpi.edu.br', // list of receivers
+                to: email, // list of receivers
                 subject: "Validação de conta do acompi", // Subject line
                 html: '<h1>Validação de email</h1> <p>Clique no link para validar sua conta no acompi.</p><a href=https://acompi-back-end-la29.onrender.com/cadastro/' + token + '> Clique aqui</a>', // html body
                 text: "Clique no link para validar sua conta no acompi.\n ${confirmationCode}", // plain text body
@@ -167,7 +167,7 @@ rotas.post('/', async (req: Request, res: Response) => {
             // enviando email de confirmação
             let info = await transporter.sendMail({
                 from: 'acompi <acompi110@gmail.com>', // sender address
-                to: 'capic.2021118tads0149@aluno.ifpi.edu.br', // list of receivers
+                to: email, // list of receivers
                 subject: "Validação de conta do acompi", // Subject line
                 html: '<h1>Validação de email</h1> <p>Clique no link para validar sua conta no acompi.</p><a href=https://acompi-back-end-la29.onrender.com/cadastro/' + token + '> Clique aqui</a>', // html body
                 text: "Clique no link para validar sua conta no acompi.\n ${confirmationCode}", // plain text body
