@@ -76,7 +76,7 @@ rotas.get('/:token', async (req: Request, res: Response) => {
         })
         return res.status(200).redirect('https://acompi.netlify.app/autenticacao/login.html')
     }else{
-        return res.status(400).send('<h1>ERRO!</h1>')
+        return res.status(400).send('<h1>Código inválido!</h1>')
     }
 })
 
