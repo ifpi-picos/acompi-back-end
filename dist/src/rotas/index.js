@@ -17,7 +17,6 @@ rotas.get('/', (req, res) => {
     // levando usuário para a home
     res.send('Servidor rodando');
 });
-console.log('email');
 rotas.use('/reservas', reservas_1.default);
 rotas.use('/administrador', proibe_lab_1.default);
 rotas.use('/turmas', turmas_1.default);

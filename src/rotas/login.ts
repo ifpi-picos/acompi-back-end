@@ -32,7 +32,6 @@ rotas.post('/', async (req: Request, res: Response) => {
         console.log('fjbhdfjbhdflkgkdjghfghdfjghdjhgfghguhepgijengoerhgerhogierg') 
         return res.status(201).json('Login efetuado com sucesso!');
 
-
 } catch (error: any) {
         res.status(400).json(error.message)
 }
