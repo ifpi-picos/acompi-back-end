@@ -27,7 +27,7 @@ rotas.get('/:token', async (req: Request, res: Response) => {
         },
     })
     if (aluno) {
-        const updateUser = await prisma.aluno.update({
+        await prisma.aluno.update({
             where: {
                 id: aluno.id
             },
@@ -49,10 +49,10 @@ rotas.get('/:token', async (req: Request, res: Response) => {
                 ],
             },
         })
-        res.status(200).json(updateUser)
+        return res.status(200).redirect('https://acompi.netlify.app/autenticacao/login.html')
     }
     else if(professor) {
-        const updateUser = await prisma.professor.update({
+        await prisma.professor.update({
             where: {
                 id: professor.id
             },
@@ -74,9 +74,9 @@ rotas.get('/:token', async (req: Request, res: Response) => {
                 ],
             },
         })
-        res.status(200).json(updateUser)
+        return res.status(200).redirect('https://acompi.netlify.app/autenticacao/login.html')
     }else{
-        return res.status(400).send('erro no código')
+        return res.status(400).send('<h1>ERRO!</h1>')
     }
 })
 
