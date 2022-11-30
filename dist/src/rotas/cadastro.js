@@ -86,7 +86,7 @@ rotas.post('/', async (req, res) => {
     const { nome, senha, email } = req.body;
     // Criptografando senha
     const bcrypt = require('bcryptjs');
-    const salt = bcrypt.genSaltSync(20);
+    const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(senha, salt);
     // Gerando token de validação do email
     function geraStringAleatoria(tamanho) {
@@ -113,7 +113,7 @@ rotas.post('/', async (req, res) => {
         from: 'acompi <acompi110@gmail.com>',
         to: email,
         subject: "Validação de conta do acompi",
-        html: '<h1>Validação de email</h1> <p>Clique no link para validar sua conta no acompi.</p><a href=http://localhost:3000/cadastro/' + token + '> Clique aqui</a>',
+        html: '<h1>Validação de email</h1> <p>Clique no link para validar sua conta no acompi.</p><a href=https://acompi-back-end-la29.onrender.com/cadastro/' + token + '> Clique aqui</a>',
         text: "Clique no link para validar sua conta no acompi.\n ${confirmationCode}", // plain text body
     });
     // Criando o usuário
@@ -138,11 +138,7 @@ rotas.post('/', async (req, res) => {
                 ],
             }
         });
-        console.log(aluno);
-        console.log(professor);
-        console.log(req.body);
-        if (email.indexOf('aluno.ifpi.edu.br') != -1 && senha.length >= 8 && senha.length <= 12 && nome != '' && nome.length >= 3 && !aluno) {
-            console.log('erro no create');
+        if (email.indexOf('@aluno.ifpi.edu.br') != -1 && senha.length >= 8 && senha.length <= 12 && nome != '' && nome.length >= 3 && aluno[0] == null) {
             const user = await prisma.aluno.create({
                 data: {
                     nome,
@@ -153,7 +149,7 @@ rotas.post('/', async (req, res) => {
             });
             res.status(201).json(user);
         }
-        else if (email.indexOf('ifpi.edu.br') != -1 && senha.length >= 8 && senha.length <= 12 && nome != '' && nome.length >= 3 && !professor && email.indexOf('aluno') == -1) {
+        else if (email.indexOf('@ifpi.edu.br') != -1 && senha.length >= 8 && senha.length <= 12 && nome != '' && nome.length >= 3 && professor[0] == null) {
             const user = await prisma.professor.create({
                 data: {
                     nome,
