@@ -8,23 +8,29 @@ const prisma = new PrismaClient;
 const rotas = Router();
 
 rotas.post('/', async (req: Request, res: Response) => {
-    console.log('fjbhdfjbhdflkgkdjghfghdfjghdjhgfghguhepgijengoerhgerhogierg') 
-    try {
-    
-    const { email, senha } = req.body;
-    console.log('fjbhdfjbhdflkgkdjghfghdfjghdjhgfghguhepgijengoerhgerhogierg') 
-    const usuario = await prisma.aluno.findFirst({where: {email}});
-    
+    try {    
 
-    if (!usuario) throw new Error ('Dados incorretos!');
-    
-    if(!compareSync(senha, usuario.senha)) throw Error("Senha incorreta!");
-    
-    const token = jwt.sign({ id: usuario.id }, 'dkfjhsflvhdfjlhdfjkghlfjgldjfljdhflh', { expiresIn: "1d" });
-    console.log(usuario)
-    res.cookie('token', token, { maxAge: 5000000, httpOnly: true, sameSite: 'none', secure: false})
-    console.log('fjbhdfjbhdflkgkdjghfghdfjghdjhgfghguhepgijengoerhgerhogierg') 
-    return res.status(201).json('Login efetuado com sucesso!');
+        const { email, senha } = req.body;
+        
+        let usuario;
+        if (email.indexOf('aluno.ifpi.edu.br')){
+            usuario = await prisma.aluno.findFirst({where: {email}});
+        } else if (email.indexOf('ifpi.edu.br')) {
+            usuario = await prisma.professor.findFirst({where: {email}});
+        } else {
+            usuario = await prisma.administrador.findFirst({where: {email}})
+        }
+        
+
+        if (!usuario) throw new Error ('Dados incorretos!');
+        
+        if(!compareSync(senha, usuario.senha)) throw Error("Senha incorreta!");
+        
+        const token = jwt.sign({ id: usuario.id }, 'dkfjhsflvhdfjlhdfjkghlfjgldjfljdhflh', { expiresIn: "1d" });
+        console.log(usuario)
+        res.cookie('token', token, { maxAge: 5000000, httpOnly: true, sameSite: 'none', secure: false})
+        console.log('fjbhdfjbhdflkgkdjghfghdfjghdjhgfghguhepgijengoerhgerhogierg') 
+        return res.status(201).json('Login efetuado com sucesso!');
 
 
 } catch (error: any) {

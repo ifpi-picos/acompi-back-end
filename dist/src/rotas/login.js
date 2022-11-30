@@ -10,11 +10,18 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient;
 const rotas = (0, express_1.Router)();
 rotas.post('/', async (req, res) => {
-    console.log('fjbhdfjbhdflkgkdjghfghdfjghdjhgfghguhepgijengoerhgerhogierg');
     try {
         const { email, senha } = req.body;
-        console.log('fjbhdfjbhdflkgkdjghfghdfjghdjhgfghguhepgijengoerhgerhogierg');
-        const usuario = await prisma.aluno.findFirst({ where: { email } });
+        let usuario;
+        if (email.indexOf('aluno.ifpi.edu.br')) {
+            usuario = await prisma.aluno.findFirst({ where: { email } });
+        }
+        else if (email.indexOf('ifpi.edu.br')) {
+            usuario = await prisma.professor.findFirst({ where: { email } });
+        }
+        else {
+            usuario = await prisma.administrador.findFirst({ where: { email } });
+        }
         if (!usuario)
             throw new Error('Dados incorretos!');
         if (!(0, bcryptjs_1.compareSync)(senha, usuario.senha))
