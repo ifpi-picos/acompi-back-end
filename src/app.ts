@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import autentication from "../middleware/auth";
 import rotas from './rotas';
 import cookieParser from 'cookie-parser'
+import path from 'path';
 var cors = require('cors');
 
 const app = express();
@@ -19,7 +20,7 @@ app.use(express.json());
 app.listen(3000, () => console.log(`Servidor funcionando!`));
 
 app.all('/*', (req: Request, res: Response, next: NextFunction) =>{
-    const publicRoutes = ['/login', '/cadastro', '/modificar-senha','/confirmacao'];
+    const publicRoutes = ['/login', '/cadastro','/cadastro'+req.params[0].slice(8), '/modificar-senha','/confirmacao'];
     for (let i = 0; i < publicRoutes.length; i +=1) {
         if (req.path === publicRoutes[i]) {
             return next();

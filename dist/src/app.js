@@ -18,7 +18,7 @@ app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
 app.listen(3000, () => console.log(`Servidor funcionando!`));
 app.all('/*', (req, res, next) => {
-    const publicRoutes = ['/login', '/cadastro', '/modificar-senha', '/confirmacao'];
+    const publicRoutes = ['/login', '/cadastro', '/cadastro' + req.params[0].slice(8), '/modificar-senha', '/confirmacao'];
     for (let i = 0; i < publicRoutes.length; i += 1) {
         if (req.path === publicRoutes[i]) {
             return next();
