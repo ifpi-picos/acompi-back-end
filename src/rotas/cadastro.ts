@@ -100,7 +100,7 @@ rotas.post('/', async (req: Request, res: Response) => {
     const codigoValidacao = geraStringAleatoria(20);
     const token = jwt.sign({ email: email }, codigoValidacao,)
 
-    // Enviando email de confirmação para o usuário
+    // criando o transporter para enviar email
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
@@ -109,13 +109,6 @@ rotas.post('/', async (req: Request, res: Response) => {
             user: 'acompi110@gmail.com',
             pass: 'uyflebvcolrjwofo',
         },
-    });
-    let info = await transporter.sendMail({
-        from: 'acompi <acompi110@gmail.com>', // sender address
-        to: email, // list of receivers
-        subject: "Validação de conta do acompi", // Subject line
-        html: '<h1>Validação de email</h1> <p>Clique no link para validar sua conta no acompi.</p><a href=https://acompi-back-end-la29.onrender.com/cadastro/' + token + '> Clique aqui</a>', // html body
-        text: "Clique no link para validar sua conta no acompi.\n ${confirmationCode}", // plain text body
     });
     // Criando o usuário
     try {
@@ -140,6 +133,7 @@ rotas.post('/', async (req: Request, res: Response) => {
             }
         })
         if (email.indexOf('@aluno.ifpi.edu.br') != -1 && senha.length >= 8 && senha.length <= 12 && nome != '' && nome.length >= 3 && aluno[0] == null) {
+            // criando o usuario
             const user = await prisma.aluno.create({
                 data: {
                     nome,
@@ -148,11 +142,20 @@ rotas.post('/', async (req: Request, res: Response) => {
                     codigoConfirmacao: token,
                 },
             });
-
+            // enviando o email de confirmação
+            let info = await transporter.sendMail({
+                from: 'acompi <acompi110@gmail.com>', // sender address
+                to: 'capic.2021118tads0149@aluno.ifpi.edu.br', // list of receivers
+                subject: "Validação de conta do acompi", // Subject line
+                html: '<h1>Validação de email</h1> <p>Clique no link para validar sua conta no acompi.</p><a href=https://acompi-back-end-la29.onrender.com/cadastro/' + token + '> Clique aqui</a>', // html body
+                text: "Clique no link para validar sua conta no acompi.\n ${confirmationCode}", // plain text body
+            });
+            // usuário criado
             res.status(201).json(user);
 
             
         } else if (email.indexOf('@ifpi.edu.br') != -1 && senha.length >= 8 && senha.length <= 12 && nome != '' && nome.length >= 3 && professor[0] == null) {
+            // criando o usuário
             const user = await prisma.professor.create({
                 data: {
                     nome,
@@ -161,7 +164,15 @@ rotas.post('/', async (req: Request, res: Response) => {
                     codigoConfirmacao: token,
                 },
             });
-
+            // enviando email de confirmação
+            let info = await transporter.sendMail({
+                from: 'acompi <acompi110@gmail.com>', // sender address
+                to: 'capic.2021118tads0149@aluno.ifpi.edu.br', // list of receivers
+                subject: "Validação de conta do acompi", // Subject line
+                html: '<h1>Validação de email</h1> <p>Clique no link para validar sua conta no acompi.</p><a href=https://acompi-back-end-la29.onrender.com/cadastro/' + token + '> Clique aqui</a>', // html body
+                text: "Clique no link para validar sua conta no acompi.\n ${confirmationCode}", // plain text body
+            });
+            // usuário criado
             res.status(201).json(user);
         }
         else {
