@@ -13,9 +13,9 @@ rotas.post('/', async (req: Request, res: Response) => {
         const { email, senha } = req.body;
         
         let usuario;
-        if (email.indexOf('aluno.ifpi.edu.br')){
+        if (email.indexOf('@aluno.ifpi.edu.br')!= -1){
             usuario = await prisma.aluno.findFirst({where: {email}});
-        } else if (email.indexOf('ifpi.edu.br')) {
+        } else if (email.indexOf('@ifpi.edu.br')!= -1) {
             usuario = await prisma.professor.findFirst({where: {email}});
         } else {
             usuario = await prisma.administrador.findFirst({where: {email}})
