@@ -19,7 +19,7 @@ rotas.post('/', async (req, res) => {
         else if (email.indexOf('@ifpi.edu.br') != -1) {
             usuario = await prisma.professor.findFirst({ where: { email } });
         }
-        else {
+        else if (email.indexOf('coord-ads.capic@ifpi.edu.br') != -1) {
             usuario = await prisma.administrador.findFirst({ where: { email } });
         }
         if (!usuario)
