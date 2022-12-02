@@ -17,9 +17,8 @@ rotas.post('/', async (req: Request, res: Response) => {
             usuario = await prisma.aluno.findFirst({where: {email}});
         } else if (email.indexOf('@ifpi.edu.br')!= -1) {
             usuario = await prisma.professor.findFirst({where: {email}});
-        } else {
-            usuario = await prisma.administrador.findFirst({where: {email}})
-        }
+        } else if (email.indexOf('coord-ads.capic@ifpi.edu.br')!= -1) {
+            usuario = await prisma.administrador.findFirst({where: {email}})}
         
 
         if (!usuario) throw new Error ('Dados incorretos!');
