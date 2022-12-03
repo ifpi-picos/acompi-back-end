@@ -48,7 +48,6 @@ model Laboratorio {
   id_lab                  Int                 @id @unique @default(autoincrement())
   quantidade_computadores Int
   bloqueia                Bloqueia[]
-  turma                   CriarTurma[]
   proibe                  ProibeLaboratorio[]
 
   @@map("laboratorio")
@@ -69,14 +68,13 @@ model Bloqueia {
 }
 
 model CriarTurma {
-  id_turma        Int         @unique
-  email_professor String      @db.VarChar(20)
-  id_lab          Int
-  data_turma      DateTime
-  curso           String      @db.VarChar(20)
-  horario_inicio  DateTime
-  horario_fim     DateTime
-  laboratorio     Laboratorio @relation(fields: [id_lab], references: [id_lab])
+  id_turma       Int    @id @default(autoincrement())
+  id_lab         Int
+  data_turma     String
+  curso          String
+  horario_inicio String
+  horario_fim    String
+  id_professor   Int
 
   @@map("criarturma")
 }
