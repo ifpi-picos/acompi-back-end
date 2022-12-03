@@ -19,40 +19,74 @@ rotas.patch('/', async (req, res) => {
     const salt = bcryptjs_1.default.genSaltSync(10);
     const hash = bcryptjs_1.default.hashSync(senha, salt);
     try {
-        const usuario = await prisma.aluno.findFirst({ where: { email } });
-        console.log(usuario);
-        if (!usuario) {
-            throw new Error('Usuário não cadastrado');
+        if (email.indexOf('aluno.ifpi.edu.br') !== -1 && senha == confirmasenha) {
+            const alunoExist = await prisma.aluno.findFirst({
+                where: {
+                    email: email,
+                    AND: [
+                        {
+                            status: true
+                        },
+                    ],
+                }
+            });
+            if (!alunoExist)
+                throw new Error("Aluno não cadastrado");
+            const aluno = await prisma.aluno.update({
+                data: {
+                    senha: hash,
+                },
+                where: {
+                    id: alunoExist.id,
+                }
+            });
+            return res.status(201).json("Deu certo");
         }
-        else {
-            if (email.indexOf('aluno.ifpi.edu.br') && senha == confirmasenha) {
-                const email2 = email;
-                const aluno = await prisma.aluno.update({
-                    data: {
-                        senha: hash,
-                    },
-                    where: {
-                        id: usuario.id
-                    }
-                });
-                res.status(201).json(aluno);
-            }
-            else if (email.indexOf('ifpi.edu.br') && senha == confirmasenha) {
-                const professor = await prisma.professor.update({
-                    data: {
-                        senha: hash,
-                    },
-                    where: email
-                });
-                res.status(201).json(professor);
-            }
-            else {
-                return res.status(400).json({ message: 'erro no cadastro' });
-            }
+        else if (email.indexOf('coord-ads.capic@ifpi.edu.br') !== -1 && senha == confirmasenha) {
+            const administradorExist = await prisma.administrador.findFirst({
+                where: {
+                    email: email,
+                }
+            });
+            if (!administradorExist)
+                throw new Error("Administrador não cadastrado");
+            const administrador = await prisma.administrador.update({
+                data: {
+                    senha: hash,
+                },
+                where: {
+                    id: administradorExist.id,
+                }
+            });
+            return res.status(201).json("Deu Certo");
         }
+        else if (email.indexOf('ifpi.edu.br') !== -1 && senha == confirmasenha) {
+            const professorExist = await prisma.professor.findFirst({
+                where: {
+                    email: email,
+                    AND: [
+                        {
+                            status: true
+                        },
+                    ],
+                }
+            });
+            if (!professorExist)
+                throw new Error("Professor não cadastrado");
+            const professor = await prisma.professor.update({
+                data: {
+                    senha: hash,
+                },
+                where: {
+                    id: professorExist.id,
+                }
+            });
+            return res.status(201).json("Deu certo");
+        }
+        return res.status(400).json('Erro');
     }
-    catch (erro) {
-        res.status(400).json(erro.message);
+    catch (error) {
+        return res.status(400);
     }
 });
 exports.default = rotas;
