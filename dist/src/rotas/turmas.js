@@ -8,11 +8,20 @@ rotas.get('/', async (req, res) => {
     const visualizarturmas = await prisma.criarTurma.findMany({});
     res.status(200).json(visualizarturmas);
 });
+rotas.get('/:id', async (req, res) => {
+    const professor = await prisma.professor.findUnique({
+        where: {
+            id: +req.params.id,
+        },
+    });
+    res.status(200).json(professor);
+});
 rotas.post('/', async (req, res) => {
     const { id_turma, id_professor, id_lab, data_turma, horario_inicio, horario_fim, curso } = req.body;
     try {
         const criarTurma = await prisma.criarTurma.create({
             data: {
+                id_turma,
                 id_professor,
                 id_lab,
                 data_turma,

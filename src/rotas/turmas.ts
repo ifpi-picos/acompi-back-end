@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, response } from 'express';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -8,6 +8,16 @@ rotas.get('/', async (req: Request, res: Response) => {
   const visualizarturmas = await prisma.criarTurma.findMany({});
   res.status(200).json(visualizarturmas);
 });
+
+rotas.get('/:id', async (req: Request, res: Response) => {
+  const professor = await prisma.professor.findUnique({
+    where:{
+      id : +req.params.id,
+    },
+  })
+  res.status(200).json(professor)
+});
+
 
 rotas.post('/', async (req: Request, res: Response) => {
   const { id_turma, id_professor, id_lab, data_turma, horario_inicio, horario_fim, curso } = req.body;
