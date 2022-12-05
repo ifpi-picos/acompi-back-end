@@ -9,12 +9,13 @@ datasource db {
 
 model Aluno {
   nome              String
-  senha             String   @db.VarChar
-  estado            String   @default("ativo")
+  senha             String    @db.VarChar
+  estado            String    @default("ativo")
   email             String
-  id                Int      @id @default(autoincrement())
-  codigoConfirmacao String   @unique
+  id                Int       @id @default(autoincrement())
+  codigoConfirmacao String    @unique
   status            Boolean?
+  reservas          Reserva[]
 
   @@unique([email, status])
   @@map("aluno")
@@ -26,6 +27,7 @@ model Reserva {
   computador String
   curso      String
   id_reserva Int    @id @default(autoincrement())
+  aluno      Aluno  @relation(fields: [id_aluno], references: [id])
 
   @@unique([id_aluno, id_turma])
   @@map("reserva")
@@ -39,6 +41,7 @@ model Professor {
   id                Int      @id @default(autoincrement())
   codigoConfirmacao String   @unique
   status            Boolean?
+  turmas            Turma[]
 
   @@unique([email, status])
   @@map("professor")
@@ -67,16 +70,17 @@ model Bloqueia {
   @@map("bloqueia")
 }
 
-model CriarTurma {
-  id_turma       Int    @id @default(autoincrement())
+model Turma {
   id_lab         Int
   data_turma     String
   curso          String
   horario_inicio String
   horario_fim    String
   id_professor   Int
+  id             Int       @id @default(autoincrement())
+  professor      Professor @relation(fields: [id_professor], references: [id])
 
-  @@map("criarturma")
+  @@map("turma")
 }
 
 model Administrador {

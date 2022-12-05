@@ -51,7 +51,7 @@ rotas.get('/:token', async (req, res) => {
                 ],
             },
         });
-        return res.status(200).redirect('https://acompi.netlify.app/autenticacao/login.html');
+        return res.status(200).send('<script>alert("Usuário validado"); window.location.href = "https://acompi.netlify.app/autenticacao/login.html"; </script>');
     }
     else if (professor) {
         await prisma.professor.update({
@@ -76,7 +76,7 @@ rotas.get('/:token', async (req, res) => {
                 ],
             },
         });
-        return res.status(200).redirect('https://acompi.netlify.app/autenticacao/login.html');
+        return res.status(200).send('<script>alert("Usuário validado"); window.location.href = "https://acompi.netlify.app/autenticacao/login.html"; </script>');
     }
     else {
         return res.status(400).send('<h1>Código inválido!</h1>');
@@ -146,7 +146,7 @@ rotas.post('/', async (req, res) => {
                 from: 'acompi <acompi110@gmail.com>',
                 to: email,
                 subject: "Validação de conta do acompi",
-                html: '<h1>Validação de email</h1> <p>Clique no link para validar sua conta no acompi.</p><a href=https://acompi-back-end-la29.onrender.com/cadastro/' + token + '> Clique aqui</a>',
+                html: '<h1>Validação de email</h1> <p>Clique no link para validar sua conta no acompi.</p><a href=http://localhost:3000/cadastro/' + token + '> Clique aqui</a>',
                 text: "Clique no link para validar sua conta no acompi.\n ${confirmationCode}", // plain text body
             });
             // usuário criado
@@ -165,9 +165,9 @@ rotas.post('/', async (req, res) => {
             // enviando email de confirmação
             let info = await transporter.sendMail({
                 from: 'acompi <acompi110@gmail.com>',
-                to: email,
+                to: 'capic.2021118tads0149@aluno.ifpi.edu.br',
                 subject: "Validação de conta do acompi",
-                html: '<h1>Validação de email</h1> <p>Clique no link para validar sua conta no acompi.</p><a href=https://acompi-back-end-la29.onrender.com/cadastro/' + token + '> Clique aqui</a>',
+                html: '<h1>Validação de email</h1> <p>Clique no link para validar sua conta no acompi.</p><a href=http://localhost:3000/cadastro/' + token + '> Clique aqui</a>',
                 text: "Clique no link para validar sua conta no acompi.\n ${confirmationCode}", // plain text body
             });
             // usuário criado

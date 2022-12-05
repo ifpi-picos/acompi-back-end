@@ -5,23 +5,29 @@ const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 const rotas = (0, express_1.Router)();
 rotas.get('/', async (req, res) => {
-    const visualizarturmas = await prisma.criarTurma.findMany({});
+    const visualizarturmas = await prisma.turma.findMany({});
     res.status(200).json(visualizarturmas);
 });
 rotas.get('/:id', async (req, res) => {
-    const professor = await prisma.professor.findUnique({
+    const professor = await prisma.professor.findMany({
         where: {
             id: +req.params.id,
+        },
+        include: {
+            turmas: {
+                where: {
+                    id_professor: +req.params.id,
+                },
+            },
         },
     });
     res.status(200).json(professor);
 });
 rotas.post('/', async (req, res) => {
-    const { id_turma, id_professor, id_lab, data_turma, horario_inicio, horario_fim, curso } = req.body;
+    const { id_professor, id_lab, data_turma, horario_inicio, horario_fim, curso } = req.body;
     try {
-        const criarTurma = await prisma.criarTurma.create({
+        const criarTurma = await prisma.turma.create({
             data: {
-                id_turma,
                 id_professor,
                 id_lab,
                 data_turma,
@@ -36,15 +42,14 @@ rotas.post('/', async (req, res) => {
         res.status(400).send(erro);
     }
 });
-// erro ao criar o servidor novamente
-// rotas.delete('/', async (req: Request, res: Response) => {
-//   const { email_professor } = req.body;
-//   const delete_criarTurma = await prisma.criarTurma.delete({
-//     where: {
-//       email_professor: email_professor,
-//     },
-//   })
-//   res.status(200).json(delete_criarTurma)
-// });
+rotas.delete('/', async (req, res) => {
+    const { id } = req.body;
+    const delete_criarTurma = await prisma.turma.delete({
+        where: {
+            id: id,
+        },
+    });
+    res.status(200).json(delete_criarTurma);
+});
 exports.default = rotas;
 //# sourceMappingURL=turmas.js.map

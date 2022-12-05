@@ -5,14 +5,21 @@ const prisma = new PrismaClient();
 const rotas = Router();
 
 rotas.get('/', async (req: Request, res: Response) => {
-  const visualizarturmas = await prisma.criarTurma.findMany({});
+  const visualizarturmas = await prisma.turma.findMany({});
   res.status(200).json(visualizarturmas);
 });
 
 rotas.get('/:id', async (req: Request, res: Response) => {
-  const professor = await prisma.professor.findUnique({
-    where:{
-      id : +req.params.id,
+  const professor = await prisma.professor.findMany({
+    where: {
+      id: +req.params.id,
+    },
+    include: {
+      turmas: {
+        where: {
+          id_professor: +req.params.id,
+        },
+      },
     },
   })
   res.status(200).json(professor)
@@ -20,11 +27,10 @@ rotas.get('/:id', async (req: Request, res: Response) => {
 
 
 rotas.post('/', async (req: Request, res: Response) => {
-  const { id_turma, id_professor, id_lab, data_turma, horario_inicio, horario_fim, curso } = req.body;
+  const { id_professor, id_lab, data_turma, horario_inicio, horario_fim, curso } = req.body;
   try {
-    const criarTurma = await prisma.criarTurma.create({
+    const criarTurma = await prisma.turma.create({
       data: {
-        id_turma,
         id_professor,
         id_lab,
         data_turma,
@@ -39,15 +45,14 @@ rotas.post('/', async (req: Request, res: Response) => {
   }
 });
 
-// erro ao criar o servidor novamente
-// rotas.delete('/', async (req: Request, res: Response) => {
-//   const { email_professor } = req.body;
-//   const delete_criarTurma = await prisma.criarTurma.delete({
-//     where: {
-//       email_professor: email_professor,
-//     },
-//   })
-//   res.status(200).json(delete_criarTurma)
-// });
+rotas.delete('/', async (req: Request, res: Response) => {
+  const { id } = req.body;
+  const delete_criarTurma = await prisma.turma.delete({
+    where: {
+      id: id,
+    },
+  })
+  res.status(200).json(delete_criarTurma)
+});
 
 export default rotas;
