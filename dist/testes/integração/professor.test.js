@@ -4,11 +4,11 @@
 // import app from '../../src/app';
 // import prisma from '../helpers/index';
 // beforeAll(async () => {
-//   const removeCriarTurmas = prisma.criarTurma.deleteMany();
+//   const removeCriarTurmas = prisma.turma.deleteMany();
 //   await prisma.$transaction([removeCriarTurmas]);
 // });
 // afterAll(async() => {
-//   const removeCriarTurmas = prisma.criarTurma.deleteMany();
+//   const removeCriarTurmas = prisma.turma.deleteMany();
 //   await prisma.$transaction([removeCriarTurmas]);
 //   await prisma.$disconnect();
 // });
