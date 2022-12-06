@@ -6,12 +6,12 @@
 // import prisma from '../helpers/index';
 
 // beforeAll(async () => {
-//   const removeBloqueia = prisma.criarTurma.deleteMany();
+//   const removeBloqueia = prisma.turma.deleteMany();
 //   await prisma.$transaction([removeBloqueia]);
 // });
 
 // afterAll(async() => {
-//   const removeBloqueia = prisma.criarTurma.deleteMany();
+//   const removeBloqueia = prisma.turma.deleteMany();
 //   await prisma.$transaction([removeBloqueia]);
 //   await prisma.$disconnect();
 // });

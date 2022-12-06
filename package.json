@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "tsc && node ./dist/src/app.js",
     "build": "tsc",
-    "test": "dotenv -e .env.test jest -i && jest",
+    "test": "dotenv -e .env.test jest -i && jest --maxWorkers=1",
     "start": "node ./dist/src/app.js",
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
+    "testgenerate": "dotenv -e .env.test -- npx prisma generate",
     "migratetest": "dotenv -e .env.test -- npx prisma db push",
     "migratedev": "dotenv -e .env -- npx prisma db push"
   },
@@ -43,7 +44,7 @@
   "devDependencies": {
     "@prisma/client": "^4.7.0",
     "@types/express": "^4.17.14",
-    "@types/jest": "^29.1.2",
+    "@types/jest": "^29.2.4",
     "@types/luxon": "^3.0.2",
     "@types/node": "^18.11.10",
     "@types/supertest": "^2.0.12",
