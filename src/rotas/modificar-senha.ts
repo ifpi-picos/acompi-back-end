@@ -16,7 +16,6 @@ rotas.patch('/', async(req: Request, res: Response) => {
   const {email, senha, confirmasenha} = req.body;
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(senha, salt);
-
   try{
     if (email.indexOf('aluno.ifpi.edu.br') !== -1 && senha == confirmasenha) {
       const alunoExist = await prisma.aluno.findFirst({
