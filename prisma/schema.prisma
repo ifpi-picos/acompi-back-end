@@ -15,7 +15,7 @@ model Aluno {
   id                Int       @id @default(autoincrement())
   codigoConfirmacao String    @unique
   status            Boolean?
-  reservas          Reserva[]
+  Reserva           Reserva[]
 
   @@unique([email, status])
   @@map("aluno")
@@ -28,7 +28,8 @@ model Reserva {
   curso      String
   id_reserva Int    @id @default(autoincrement())
   aluno      Aluno  @relation(fields: [id_aluno], references: [id])
-  turma     Turma @relation(fields: [id_turma], references: [id])
+  turma      Turma  @relation(fields: [id_turma], references: [id])
+
   @@unique([id_aluno, id_turma])
   @@map("reserva")
 }
@@ -78,8 +79,8 @@ model Turma {
   horario_fim    String
   id_professor   Int
   id             Int       @id @default(autoincrement())
-  reservas       Reserva[]
   professor      Professor @relation(fields: [id_professor], references: [id])
+  Reserva        Reserva[]
 
   @@map("turma")
 }

@@ -103,7 +103,6 @@ rotas.patch('/', async (req, res) => {
     const { email, senha, confirmasenha } = req.body;
     const salt = bcryptjs_1.default.genSaltSync(10);
     const hash = bcryptjs_1.default.hashSync(senha, salt);
-    console.log(email);
     let transporder = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,

@@ -9,6 +9,21 @@ rotas.get('/', async (req: Request, res: Response) => {
   res.status(200).json(reservas);
 });
 
+rotas.get('/turma/:id'), async (req: Request, res: Response) => {
+  // const turma = await prisma.turma.findMany({
+  //   where: {
+  //     id: +req.params.id,
+  //   },
+  //   include: {
+  //     reservas: {
+  //       where: {
+  //         id): +req.params.id,
+  //       },
+  //     },
+  //   },
+  // })
+}
+
 rotas.post('/', async (req: Request, res: Response) => {
   const { id_aluno, id_turma, computador, curso} = req.body;
   try {
