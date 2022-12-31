@@ -2,7 +2,7 @@
   "name": "acompi-back-end",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/app.ts",
   "scripts": {
     "dev": "tsc && node ./dist/src/app.js",
     "build": "tsc",
