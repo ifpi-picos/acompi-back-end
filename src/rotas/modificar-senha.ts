@@ -50,7 +50,11 @@ rotas.get('/:usuario', async(req: Request, res: Response) => {
         }
       });
       return res.status(200).send('<script>alert("Senha alterada!"); window.location.href = "https://acompi.netlify.app/autenticacao/login.html"; </script>')
+<<<<<<< HEAD
     }
+=======
+    };
+>>>>>>> 7fdb29322ae0d3bffa0ddc701a14a808ce52275d
 
     if(email.indexOf('coord-ads.capic@ifpi.edu.br') != -1) {
       administradorExist = await prisma.administrador.findFirst({
@@ -67,7 +71,11 @@ rotas.get('/:usuario', async(req: Request, res: Response) => {
         }
       });
       return res.status(200).send('<script>alert("Senha alterada!"); window.location.href = "https://acompi.netlify.app/autenticacao/login.html"; </script>')
+<<<<<<< HEAD
     }
+=======
+    };
+>>>>>>> 7fdb29322ae0d3bffa0ddc701a14a808ce52275d
 
     if(email.indexOf('ifpi.edu.br') != -1) {
       professorExist = await prisma.professor.findFirst({
@@ -101,7 +109,11 @@ rotas.patch('/', async(req: Request, res: Response) => {
   const hash = bcrypt.hashSync(senha, salt);
   const usuario  = email+';'+senha+';'+confirmasenha;
 
+<<<<<<< HEAD
   const transporder = nodemailer.createTransport({
+=======
+  let transporder = nodemailer.createTransport({
+>>>>>>> 7fdb29322ae0d3bffa0ddc701a14a808ce52275d
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
@@ -125,7 +137,11 @@ rotas.patch('/', async(req: Request, res: Response) => {
       });
       console.log('Aluno existe.')
       if(!alunoExist) throw new Error("Aluno não cadastrado");
+<<<<<<< HEAD
       const info = await transporder.sendMail({
+=======
+      let info = await transporder.sendMail({
+>>>>>>> 7fdb29322ae0d3bffa0ddc701a14a808ce52275d
         from: 'acompi <acompi110@gmail.com>',
         to: 'capic.2021118tads0270@aluno.ifpi.edu.br',
         subject: "Alteração de senha da conta",
@@ -141,7 +157,11 @@ rotas.patch('/', async(req: Request, res: Response) => {
         }
       });
       if(!administradorExist) throw new Error("Administrador não cadastrado");
+<<<<<<< HEAD
       const info = await transporder.sendMail({
+=======
+      let info = await transporder.sendMail({
+>>>>>>> 7fdb29322ae0d3bffa0ddc701a14a808ce52275d
         from: 'acompi <acompi110@gmail.com>',
         to: 'capic.2021118tads0270@aluno.ifpi.edu.br',
         subject: "Alteração de senha da conta",
@@ -162,7 +182,11 @@ rotas.patch('/', async(req: Request, res: Response) => {
         }
       });
       if(!professorExist) throw new Error("Professor não cadastrado");
+<<<<<<< HEAD
       const info = await transporder.sendMail({
+=======
+      let info = await transporder.sendMail({
+>>>>>>> 7fdb29322ae0d3bffa0ddc701a14a808ce52275d
         from: 'acompi <acompi110@gmail.com>',
         to: 'capic.2021118tads0149@aluno.ifpi.edu.br',
         subject: "Alteração de senha da conta",
