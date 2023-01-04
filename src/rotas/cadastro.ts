@@ -19,12 +19,12 @@ rotas.get('/:token', async (req: Request, res: Response) => {
     const { token } = req.params;
     const aluno = await prisma.aluno.findUnique({
         where: {
-            codigoConfirmacao: token,
+            codigo_confirmacao: token,
         },
     })
     const professor = await prisma.professor.findUnique({
         where: {
-            codigoConfirmacao: token,
+            codigo_confirmacao: token,
         },
     })
     if (aluno) {
@@ -52,7 +52,7 @@ rotas.get('/:token', async (req: Request, res: Response) => {
         })
         return res.status(200).send('<script>alert("Usuário validado"); window.location.href = "https://acompi.netlify.app/autenticacao/login.html"; </script>')
     }
-    else if(professor) {
+    else if (professor) {
         await prisma.professor.update({
             where: {
                 id: professor.id
@@ -76,7 +76,7 @@ rotas.get('/:token', async (req: Request, res: Response) => {
             },
         })
         return res.status(200).send('<script>alert("Usuário validado"); window.location.href = "https://acompi.netlify.app/autenticacao/login.html"; </script>')
-    }else{
+    } else {
         return res.status(400).send('<h1>Código inválido!</h1>')
     }
 })
@@ -140,7 +140,7 @@ rotas.post('/', async (req: Request, res: Response) => {
                     nome,
                     senha: hash,
                     email,
-                    codigoConfirmacao: token,
+                    codigo_confirmacao: token,
                 },
             });
             // enviando o email de confirmação
@@ -154,7 +154,7 @@ rotas.post('/', async (req: Request, res: Response) => {
             // usuário criado
             res.status(201).json(user);
 
-            
+
         } else if (email.indexOf('@ifpi.edu.br') != -1 && senha.length >= 8 && senha.length <= 12 && nome != '' && nome.length >= 3 && professor[0] == null) {
             // criando o usuário
             const user = await prisma.professor.create({
@@ -162,7 +162,7 @@ rotas.post('/', async (req: Request, res: Response) => {
                     nome,
                     senha: hash,
                     email,
-                    codigoConfirmacao: token,
+                    codigo_confirmacao: token,
                 },
             });
             // enviando email de confirmação
