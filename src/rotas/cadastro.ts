@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import internal from 'stream';
 import jwt from "jsonwebtoken"
 import { Script } from 'vm';
+require('dotenv').config()
 const nodemailer = require('nodemailer');
 const crypto = require("crypto");
 const rotas = Router();
@@ -107,8 +108,8 @@ rotas.post('/', async (req: Request, res: Response) => {
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-            user: 'acompi110@gmail.com',
-            pass: 'uyflebvcolrjwofo',
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD,
         },
     });
     // Criando o usuário
