@@ -45,8 +45,8 @@ export const enviaEmail = async (transporter: any, token: string, email: string)
         from: 'acompi <acompi110@gmail.com>', // sender address
         to: email, // list of receivers
         subject: "Validação de conta do acompi", // Subject line
-        html: '<h1>Validação de email</h1> <p>Clique no link para validar sua conta no acompi.</p><a href=http://localhost:3000/cadastro/' + token + '> Clique aqui</a>', // html body
-        text: "Clique no link para validar sua conta no acompi.\n <a href=http://localhost:3000/cadastro/" + token + ">Clique aqui</a>", // plain text body
+        html: '<h1>Validação de email</h1> <p>Clique no link para validar sua conta no acompi.</p><a href=https://acompi-back-end-la29.onrender.com/cadastro/' + token + '> Clique aqui</a>', // html body
+        text: "Clique no link para validar sua conta no acompi.\n <a href=https://acompi-back-end-la29.onrender.com/cadastro/" + token + ">Clique aqui</a>", // plain text body
     });
     return;
 };

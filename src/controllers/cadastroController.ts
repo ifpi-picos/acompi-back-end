@@ -1,6 +1,6 @@
 import { error } from "console";
 import { Request, Response } from "express";
-import { getAll, deletaAluno, deletaProfessor, criaAluno, criaProfessor, buscaTokenAluno, buscaTokenProfessor, atualizaStatusAluno, atualizaStatusProfessor, deletaAlunosInvalidos, deletaProfessoresInvalidos } from "../repositories/cadastro";
+import { getAll, deletaAluno, deletaProfessor, criaAluno, criaProfessor, buscaTokenAluno, buscaTokenProfessor, atualizaStatusAluno, atualizaStatusProfessor, deletaAlunosInvalidos, deletaProfessoresInvalidos } from "../repositories/cadastroRepository";
 import { criptografaSenha, criaTransporter, geraToken, enviaEmail, verificaUsuario } from "../services"
 import { validaCampos } from "../services/cadastroService";
 
@@ -37,7 +37,7 @@ export const cria = async (req: Request, res: Response) => {
         };
         // enviando o email
         await enviaEmail(transporter, token, req.body.email);
-        res.status(200).send(usuario);
+        res.status(201).send(usuario);
     } catch (e) {
         res.status(400).send(e);
     }

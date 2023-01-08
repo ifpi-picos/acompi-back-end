@@ -3,6 +3,8 @@ import { Router } from 'express';
 
 const rotas = Router();
 
+// rotas criadas por Allan Barbosa
+
 rotas.get('/', get);
 rotas.get('/:token', recebeToken)
 rotas.post('/', cria); 
