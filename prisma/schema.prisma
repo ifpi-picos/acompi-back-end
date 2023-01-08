@@ -11,23 +11,23 @@ model Aluno {
   id                 Int       @id @default(autoincrement())
   email              String
   nome               String
-  senha              String    @db.VarChar(12)
+  senha              String
   codigo_confirmacao String    @unique
   status             Boolean?
-  reservas           Reserva[]
+  reservas           Reserva[] @relation("aluno")
 
   @@unique([email, status])
   @@map("aluno")
 }
 
 model Professor {
-  id                 Int      @id @default(autoincrement())
+  id                 Int     @id @default(autoincrement())
   email              String
   nome               String
-  senha              String   @db.VarChar(12)
-  codigo_confirmacao String   @unique
+  senha              String
+  codigo_confirmacao String  @unique
   status             Boolean?
-  turmas             Turma[]
+  turmas             Turma[] @relation("professor")
 
   @@unique([email, status])
   @@map("professor")
@@ -41,21 +41,21 @@ model Turma {
   data_turma     String
   horario_inicio String
   horario_fim    String
-  reservas       Reserva[]
-  professor      Professor @relation(fields: [id_professor], references: [id])
+  reservas       Reserva[] @relation("turma")
+  professor      Professor @relation("professor", fields: [id_professor], references: [id], onDelete: Cascade)
 
-  @@unique([id_lab,data_turma, horario_inicio, horario_fim])
+  @@unique([id_lab, data_turma, horario_inicio, horario_fim])
   @@map("turma")
 }
 
 model Reserva {
+  id         Int    @id @unique @default(autoincrement())
   id_turma   Int
   id_aluno   Int
-  id_reserva Int    @id @default(autoincrement())
   computador String
   curso      String
-  aluno      Aluno  @relation(fields: [id_aluno], references: [id])
-  turma      Turma  @relation(fields: [id_turma], references: [id])
+  aluno      Aluno  @relation("aluno", fields: [id_aluno], references: [id], onDelete: Cascade)
+  turma      Turma  @relation("turma", fields: [id_turma], references: [id], onDelete: Cascade)
 
   @@unique([id_aluno, id_turma])
   @@map("reserva")
