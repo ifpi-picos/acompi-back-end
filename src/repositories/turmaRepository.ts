@@ -2,7 +2,7 @@ import { prisma } from "../services/index";
 import { Turma } from "../models/turma";
 
 export const getAll = async () => {
-    const turmas = await prisma.turma.findMany({});
+    const turmas = await prisma.turma.findMany({ include: { reservas: true } });
     return turmas;
 };
 
@@ -15,6 +15,15 @@ export const getByID = async (turmaID: number) => {
     return turma;
 }
 
+export const getByDataHora = async (data_turma: any, horario_inicio: any) => {
+    const turma = await prisma.turma.findMany({
+        where: {
+            data_turma: data_turma,
+            horario_inicio: horario_inicio,
+        },
+    });
+    return turma;
+}
 
 export const getProfessorTurmasById = async (ProfessorID: number) => {
     const turmas = await prisma.professor.findMany({

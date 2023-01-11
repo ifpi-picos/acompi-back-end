@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { deletaTurma, getAll, getByID, getReservasByTurma, getProfessorTurmasById, criaTurma } from "../repositories/turmaRepository";
-// import {   } from "../services/turmaService"
+import { deletaTurma, getAll, getByID, getReservasByTurma, getProfessorTurmasById, criaTurma, getByDataHora } from "../repositories/turmaRepository";
 
 export const get = async (req: Request, res: Response) =>  {
   try {
@@ -40,6 +39,11 @@ export const getReservas = async (req: Request, res: Response) => {
 
 export const cria = async (req: Request, res: Response) => {
   try {
+    if(req.body.horario_fim - req.body.horario_inicio != 1) throw "Erro de horário";
+    const verificaTurma = getByDataHora(req.body.data_turma, req.body.horario_inicio.toString()+":00");
+    if (verificaTurma != null) throw "Já existe uma turma nesse horário";
+    req.body.horario_inicio = req.body.horario_inicio.toString()+":00";
+    req.body.horario_fim = req.body.horario_fim.toString()+":00";
     const turma = await criaTurma(req.body);
     res.status(201).send(turma);
   } catch (e) {
