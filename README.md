@@ -32,19 +32,13 @@ O objetivo do ACOMPI é dar uso aos computadores ociosos do Instituto Federal do
 
 - Funcionários: aqueles que se voluntariam a supervisionar os laboratórios;
 
-- Administrador(es): Aquele(s) que gerencia(m) e supervisionam o site.
-
 Os passos para se efetuar uma reserva no ACOMPI são:
 
 - O professor cria um cartão de turma;
 
-- Os alunos aceitam os cartões de turma e ao fazer isso criam cartões de alunos;
+- Os alunos aceitam os cartões de turma e ao fazer isso criam cartões de alunos para os professores dentro das turmas;
 
-- O site prioriza os cartões dos alunos em cada turma, cartões esses que ainda podem ser reordenados pelo professor;
-
-- Após os cartões serem ordenados pelo sistema, os primeiros da fila reservam os computadores;
-
-- Exemplo: se uma turma tem 30 cartões e o laboratório 15 computadores, o sistema prioriza os cartões e os 15 primeiros efetuam a reserva.
+- Os cartões dos alunos podem ser removidos pelo professor;
 
 **Motivo da escolha das tecnologias**
 
@@ -68,7 +62,15 @@ https://www.happyhues.co/palettes/3
 
 **Execução do projeto**
 
-O projeto ainda está em desenvolvimento e não está pronto para a execução
+- instale o node no seu computador https://nodejs.org/en/download/
+
+Use os seguintes comandos dentro da página escolhida:
+
+- git init
+
+- git clone https://github.com/ifpi-picos/acompi-back-end.git
+
+- npm i
 
 **Créditos**
 
