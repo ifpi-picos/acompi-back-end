@@ -1,6 +1,6 @@
 import { error } from "console";
 import { Request, Response } from "express";
-import { getAll, deletaAluno, deletaProfessor, criaAluno, criaProfessor, buscaTokenAluno, buscaTokenProfessor, atualizaStatusAluno, atualizaStatusProfessor, deletaAlunosInvalidos, deletaProfessoresInvalidos } from "../repositories/cadastroRepository";
+import { getAll, deletaAluno, deletaProfessor, criaAluno, criaProfessor, buscaTokenAluno, buscaTokenProfessor, atualizaStatusAluno, atualizaStatusProfessor, deletaAlunosInvalidos, deletaProfessoresInvalidos, getAlunoByID } from "../repositories/cadastroRepository";
 import { criptografaSenha, criaTransporter, geraToken, enviaEmail, verificaUsuario } from "../services"
 import { validaCampos } from "../services/cadastroService";
 
@@ -8,6 +8,15 @@ export const get = async (req: Request, res: Response) => {
     try {
         const usuarios = await getAll();
         res.status(200).send(usuarios);
+    } catch (e) {
+        res.status(400).send(e);
+    }
+};
+
+export const getByID = async (req: Request, res: Response) => {
+    try {
+        const aluno = await getAlunoByID(Number(req.params.id));
+        res.status(200).send(aluno);
     } catch (e) {
         res.status(400).send(e);
     }

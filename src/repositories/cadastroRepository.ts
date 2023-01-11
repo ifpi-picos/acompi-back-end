@@ -8,6 +8,18 @@ export const getAll = async () => {
   return usuarios;
 };
 
+export const getAlunoByID = async (alunoID: number) => {
+  const aluno = await prisma.aluno.findFirst({
+    where: {
+      id: alunoID
+    },
+    include: {
+      reservas:{},
+    },
+  });
+  return aluno;
+};
+
 export const criaAluno = async (data: Usuario) => {
   const usuario = await prisma.aluno.create({
     data,
