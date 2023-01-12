@@ -1,3 +1,44 @@
+import 'jest';
+import request from 'supertest';
+import app from '../../src/app';
+import prisma from '../helpers/index';
+
+beforeAll(async () => {
+    await prisma.$connect();
+    await prisma.$transaction([prisma.aluno.deleteMany()]);
+    await prisma.$transaction([prisma.professor.deleteMany()]);
+});
+afterAll(async () => {
+    await prisma.$transaction([prisma.aluno.deleteMany()]);
+    await prisma.$transaction([prisma.professor.deleteMany()]);
+    await prisma.$disconnect();
+});
+
+describe('Testando modificação de senha.', () => {
+  test('Verificando se o aluno existe', async() => {
+    await request(app).post('/cadastro').send({
+      nome: "aluno",
+      senha: 'z@467VHb',
+      email: 'capic.2021118tads0270@aluno.ifpi.edu.br',
+      status: true,
+  })
+    const user = await request(app).patch('/modificar-senha').send({
+      email: 'capic.2021118tads0270@aluno.ifpi.edu.br',
+      senha: '0987654321',
+      confirmasenha: '0987654321'
+  });
+  expect(user.status).toBe(201)
+  },7000000);
+  // test('Verificação de aluno não existente.', async() => {
+  //   const user = await request(app).patch('/modificar-senha').send({
+  //     email: 'capic.2021118tads70@aluno.ifpi.edu.br',
+  //     senha: '0987654321',
+  //     confirmasenha: '0987654321'
+  // });
+  // expect(user.statusCode).toBe(400)
+  // });
+});
+
 // import 'jest';
 // import request from 'supertest';
 // import app from '../../src/app';
