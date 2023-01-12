@@ -39,9 +39,9 @@ export const getReservas = async (req: Request, res: Response) => {
 
 export const cria = async (req: Request, res: Response) => {
   try {
-    if(req.body.horario_fim - req.body.horario_inicio != 1) throw "Erro de horário";
-    const verificaTurma = getByDataHora(req.body.data_turma, req.body.horario_inicio.toString()+":00");
-    if (verificaTurma != null) throw "Já existe uma turma nesse horário";
+    if((+req.body.horario_fim) - (+req.body.horario_inicio) != 1) throw "Erro de horário";
+    const verificaTurma = await getByDataHora(req.body.data_turma, req.body.horario_inicio+":00", req.body.id_lab);
+    if (await verificaTurma.length != 0) throw "Já existe uma turma nesse horário";
     req.body.horario_inicio = req.body.horario_inicio.toString()+":00";
     req.body.horario_fim = req.body.horario_fim.toString()+":00";
     const turma = await criaTurma(req.body);

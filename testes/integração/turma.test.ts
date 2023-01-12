@@ -28,6 +28,7 @@
 //             status: true,
 //         })
 //         await request(app).post('/turmas').send({
+//             id: 1,
 //             id_lab: 1,
 //             id_professor: professor.body.id,
 //             curso: "administração",
