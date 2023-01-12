@@ -8,12 +8,12 @@ datasource db {
 }
 
 model Aluno {
-  id                 Int       @id @default(autoincrement())
-  email              String
   nome               String
   senha              String
-  codigo_confirmacao String    @unique
+  email              String
+  id                 Int       @id @default(autoincrement())
   status             Boolean?
+  codigo_confirmacao String    @unique
   reservas           Reserva[] @relation("aluno")
 
   @@unique([email, status])
@@ -21,26 +21,26 @@ model Aluno {
 }
 
 model Professor {
-  id                 Int     @id @default(autoincrement())
-  email              String
   nome               String
   senha              String
-  codigo_confirmacao String  @unique
+  email              String
+  id                 Int      @id @default(autoincrement())
   status             Boolean?
-  turmas             Turma[] @relation("professor")
+  codigo_confirmacao String   @unique
+  turmas             Turma[]  @relation("professor")
 
   @@unique([email, status])
   @@map("professor")
 }
 
 model Turma {
-  id             Int       @id @default(autoincrement())
   id_lab         Int
-  id_professor   Int
-  curso          String
   data_turma     String
+  curso          String
   horario_inicio String
   horario_fim    String
+  id_professor   Int
+  id             Int       @id @default(autoincrement())
   reservas       Reserva[] @relation("turma")
   professor      Professor @relation("professor", fields: [id_professor], references: [id], onDelete: Cascade)
 
@@ -49,11 +49,11 @@ model Turma {
 }
 
 model Reserva {
-  id         Int    @id @unique @default(autoincrement())
   id_turma   Int
   id_aluno   Int
   computador String
   curso      String
+  id         Int    @id @unique @default(autoincrement())
   aluno      Aluno  @relation("aluno", fields: [id_aluno], references: [id], onDelete: Cascade)
   turma      Turma  @relation("turma", fields: [id_turma], references: [id], onDelete: Cascade)
 
