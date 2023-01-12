@@ -14,7 +14,8 @@ export const cria = async (req: Request, res: Response) => {
 export const contaReservas = async (req: Request, res: Response) => {
   try {
     const reservas = await contaReservasTurma(Number(req.params.id));
-    res.status(201).send(reservas);
+    const objReservas = {qtd: reservas}
+    res.status(201).send(objReservas);
   } catch (e) {
     res.status(400).send(e);
   }
