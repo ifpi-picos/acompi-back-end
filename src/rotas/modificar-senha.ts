@@ -1,25 +1,18 @@
 import { Router, Request, Response } from 'express';
 import { Aluno, PrismaClient, Professor } from '@prisma/client';
 import bcrypt from 'bcryptjs' ;
-import { isDataView } from 'util/types';
+//import { isDataView } from 'util/types';
 const nodemailer = require('nodemailer');
 const rotas = Router();
 const prisma = new PrismaClient();
 
-rotas.get('/', async (req: Request, res: Response) => {
-  const alunos = await prisma.aluno.findMany({});
-  const professores = await prisma.professor.findMany({});
-  const usuarios = await alunos.concat(professores)
-  res.status(200).json(usuarios);
-});
-
 rotas.get('/:usuario', async(req: Request, res: Response) => {
-  const body  = await req.params
-  const dados = await body.usuario
-  const dadosSeparados = await dados.split(";")
-  const email = await dadosSeparados[0]
-  const senha = await dadosSeparados[1]
-  const confirmasenha = await dadosSeparados[2]
+  const body  = req.params
+  const dados = body.usuario
+  const dadosSeparados = dados.split(";")
+  const email = dadosSeparados[0]
+  const senha = dadosSeparados[1]
+  const confirmasenha = dadosSeparados[2]
   console.log('email:'+email)
   console.log('senha:'+senha)
   console.log('confirmaSenha:'+confirmasenha)
@@ -110,7 +103,7 @@ rotas.patch('/', async(req: Request, res: Response) => {
       if(!alunoExist) throw new Error("Aluno não cadastrado");
       let info = await transporder.sendMail({
         from: 'acompi <acompi110@gmail.com>',
-        to: 'capic.2021118tads0270@aluno.ifpi.edu.br',
+        to: email,
         subject: "Alteração de senha da conta",
         html: '<h1>Alteração de senha</h1> <p>Clique no link para modificar sua senha.</p><a href=https://acompi-back-end-la29.onrender.com/modificar-senha/' + usuario + '>.Clique Aqui.</a>',
         text: "Clique no link para modificar sua senha.\n ${confirmationCode}",
@@ -131,7 +124,7 @@ rotas.patch('/', async(req: Request, res: Response) => {
       if(!professorExist) throw new Error("Professor não cadastrado");
       let info = await transporder.sendMail({
         from: 'acompi <acompi110@gmail.com>',
-        to: 'capic.2021118tads0149@aluno.ifpi.edu.br',
+        to: email,
         subject: "Alteração de senha da conta",
         html: '<h1>Alteração de senha</h1> <p>Clique no link para modificar sua senha.</p><a href=https://acompi-back-end-la29.onrender.com/modificar-senha/' + usuario + '>.Clique Aqui.</a>',
         text: "Clique no link para modificar sua senha.\n ${confirmationCode}",
