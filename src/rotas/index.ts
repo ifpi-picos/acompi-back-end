@@ -6,7 +6,6 @@ import rotasModificarSenha from './modificar-senha';
 import rotasLogin from './login';
 
 const rotas = Router();
-
 rotas.get('/', (req: Request, res: Response) => {
   res.send('Servidor rodando!');
 });

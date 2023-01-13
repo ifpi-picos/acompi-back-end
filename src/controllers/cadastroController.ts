@@ -35,7 +35,7 @@ export const cria = async (req: Request, res: Response) => {
         // preparando para o envio do email
         const transporter = await criaTransporter();
         const token = await geraToken(req.body.email);
-        req.body.codigo_confirmacao = token;
+        req.body.codigo_confirmacao = token;   
         let usuario = null;
         // colocando usuário no banco
         if (req.body.email.indexOf('@aluno.ifpi.edu.br') != -1) {

@@ -3,8 +3,6 @@
 // import app from '../../src/app';
 // import prisma from '../helpers/index';
 
-// // tests criados por Allan Barbosa
-
 // beforeAll(async () => {
 //     await prisma.$connect();
 //     await prisma.$transaction([prisma.turma.deleteMany()]);
@@ -28,6 +26,7 @@
 //             status: true,
 //         })
 //         await request(app).post('/turmas').send({
+//             id: 1,
 //             id_lab: 1,
 //             id_professor: professor.body.id,
 //             curso: "administração",

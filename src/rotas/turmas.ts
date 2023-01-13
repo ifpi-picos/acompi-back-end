@@ -6,8 +6,6 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 const rotas = Router();
 
-// rotas feitas por Allan Barbosa
-
 rotas.get('/', get);
 rotas.get('/:id', getTurma);
 rotas.get('/professor/:id', getTurmasIdProfessor);

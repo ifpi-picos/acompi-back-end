@@ -15,11 +15,12 @@ export const getByID = async (turmaID: number) => {
     return turma;
 }
 
-export const getByDataHora = async (data_turma: any, horario_inicio: any) => {
+export const getByDataHora = async (data_turma: any, horario_inicio: any, id_lab: any) => {
     const turma = await prisma.turma.findMany({
         where: {
             data_turma: data_turma,
             horario_inicio: horario_inicio,
+            id_lab: id_lab,
         },
     });
     return turma;
