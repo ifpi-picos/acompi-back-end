@@ -1,7 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { Aluno, PrismaClient, Professor } from '@prisma/client';
 import bcrypt from 'bcryptjs' ;
-//import { isDataView } from 'util/types';
 const nodemailer = require('nodemailer');
 const rotas = Router();
 const prisma = new PrismaClient();

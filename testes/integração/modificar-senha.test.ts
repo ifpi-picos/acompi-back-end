@@ -15,68 +15,67 @@ afterAll(async () => {
 });
 
 describe('Testando modificação de senha.', () => {
-  test('Verificando se o aluno existe', async() => {
+  test('Testando modificação de senha do aluno', async() => {
     await request(app).post('/cadastro').send({
       nome: "aluno",
       senha: 'z@467VHb',
       email: 'capic.2021118tads0270@aluno.ifpi.edu.br',
       status: true,
-  })
+  });
     const user = await request(app).patch('/modificar-senha').send({
       email: 'capic.2021118tads0270@aluno.ifpi.edu.br',
       senha: '0987654321',
-      confirmasenha: '0987654321'
+      confirmasenha: '0987654321',
   });
   expect(user.status).toBe(201)
   },7000000);
-  // test('Verificação de aluno não existente.', async() => {
-  //   const user = await request(app).patch('/modificar-senha').send({
-  //     email: 'capic.2021118tads70@aluno.ifpi.edu.br',
-  //     senha: '0987654321',
-  //     confirmasenha: '0987654321'
-  // });
-  // expect(user.statusCode).toBe(400)
-  // });
+
+  test('Verificação de erro quando aluno coloca senhas diferentes.', async() => {
+    const user = await request(app).patch('/modificar-senha').send({
+      email: 'capic.2021118tads7002@aluno.ifpi.edu.br',
+      senha: '098ht50321',
+      confirmasenha: '0987654321',
+  });
+  expect(user.statusCode).toBe(400)
+  },7000000);
+
+  test('Verificação de erro quando aluno coloca apenas uma senha.', async() => {
+    const user = await request(app).patch('/modificar-senha').send({
+      email: 'capic.2021118tads7002@aluno.ifpi.edu.br',
+      senha: '0987654321',
+  });
+  expect(user.statusCode).toBe(400)
+  },7000000);
+
+  test('Testando modificação de senha do professor', async() => {
+    await request(app).post('/cadastro').send({
+      nome: "professor",
+      senha: 'qwertyuiop',
+      email: 'professor@ifpi.edu.br',
+      status: true,
+  });
+    const user = await request(app).patch('/modificar-senha').send({
+      email: 'professor@ifpi.edu.br',
+      senha: '12345678',
+      confirmasenha: '12345678',
+  });
+  expect(user.status).toBe(201)
+  },7000000);
+
+  test('Verificação de erro quando professor coloca senhas diferentes.', async() => {
+    const user = await request(app).patch('/modificar-senha').send({
+      email: 'capic.2021118tads7002@aluno.ifpi.edu.br',
+      senha: '87654321',
+      confirmasenha: 'oiutrewqh',
+  });
+  expect(user.statusCode).toBe(400)
+  },7000000);
+
+  test('Verificação de erro quando professor coloca apenas uma senha.', async() => {
+    const user = await request(app).patch('/modificar-senha').send({
+      email: 'capic.2021118tads7002@aluno.ifpi.edu.br',
+      senha: '12345678',
+  });
+  expect(user.statusCode).toBe(400)
+  },7000000);
 });
-
-// import 'jest';
-// import request from 'supertest';
-// import app from '../../src/app';
-// import prisma from '../helpers/index';
-
-// describe('Teste de modificar senha do Aluno', () => {
-//   test('Testando o patch de modificar senha de um  aluno', async() => {
-//     const newUser = {
-//       nome: "Iago Breno",
-//       email: "capic.2021118tads0270@aluno.ifpi.edu.br",
-//       senha: "87654321"
-//     }
-//     const response1 = await request(app).post('/cadastro').send(newUser)
-//     expect(response1.statusCode).toBe(201);
-//     const novaSenha = {
-//       email: "capic.2021118tads0270@aluno.ifpi.edu.br",
-//       senha: "12345678",
-//       confrimasenha: "12345678",
-//     };
-//     const response2 = await request(app).patch('/modificar-senha').send(novaSenha);
-//     expect(response2.statusCode).toBe(201);
-//   });
-
-// describe('Teste de modificar senha do professor', () => {
-//   test('Testando o patch de modificar senha de um  professor', async() => {
-//     const newUser = {
-//       nome: "Jesiel Viana",
-//       email: "professor@ifpi.edu.br",
-//       senha: "124578012"
-//     }
-//     const response1 = await request(app).post('/cadastro').send(newUser)
-//     expect(response1.statusCode).toBe(201);
-//     const novaSenha = {
-//       email: "professor@ifpi.edu.br",
-//       senha: "12345678",
-//       confrimasenha: "12345678",
-//     };
-//     const response2 = await request(app).patch('/modificar-senha').send(novaSenha);
-//     expect(response2.statusCode).toBe(201);
-//   });
-// });
