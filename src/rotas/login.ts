@@ -14,14 +14,11 @@ rotas.post('/', async (req: Request, res: Response) => {
         let userType;
         let usuario;
         if (email.indexOf('@aluno.ifpi.edu.br') != -1) {
-            usuario = await prisma.aluno.findFirst({ where: { email, status:true} });
-            if (!usuario) {
-                userType = "professor"
-            } else {
-                userType = "aluno"
-            }
+            usuario = await prisma.aluno.findFirst({ where: { email, status: true } });
+            userType = "aluno"
         } else if (email.indexOf('@ifpi.edu.br') != -1) {
-            usuario = await prisma.professor.findFirst({ where: { email, status:true } });
+            usuario = await prisma.professor.findFirst({ where: { email, status: true } });
+            userType = "professor"
         }
 
 
@@ -29,7 +26,7 @@ rotas.post('/', async (req: Request, res: Response) => {
 
         if (!compareSync(senha, usuario.senha)) throw Error("Senha incorreta!");
 
-        const token = jwt.sign({ id: usuario.id, user: userType}, 'dkfjhsflvhdfjlhdfjkghlfjgldjfljdhflh', { expiresIn: "24h" });
+        const token = jwt.sign({ id: usuario.id, user: userType }, 'dkfjhsflvhdfjlhdfjkghlfjgldjfljdhflh', { expiresIn: "24h" });
         console.log(usuario)
         // res.cookie('token', token, { maxAge: 5000000, httpOnly: true, sameSite: 'none', secure: false })
         console.log('fjbhdfjbhdflkgkdjghfghdfjghdjhgfghguhepgijengoerhgerhogierg')
