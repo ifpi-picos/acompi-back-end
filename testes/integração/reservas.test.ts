@@ -3,8 +3,6 @@
 // import app from '../../src/app';
 // import prisma from '../helpers/index';
 
-// // tests criados por Allan Barbosa
-
 // beforeAll(async () => {
 //     await prisma.$connect();
 //     await prisma.$transaction([prisma.reserva.deleteMany()]);
