@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser';
 const app = express();
 
 app.use(cors({
-    origin: process.env.FRONTEND || "*", // url do front
+    origin: process.env.FRONTEND, // url do front
     credentials: true,
     methods: 'GET, PUT, POST, OPTIONS, DELETE, PATCH',
 }));
