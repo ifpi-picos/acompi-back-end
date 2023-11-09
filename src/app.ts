@@ -3,7 +3,6 @@ import autentication from "../middleware/auth";
 import rotas from './rotas';
 import cors from "cors";
 import cookieParser from 'cookie-parser';
-import helmet from 'helmet';
 
 const app = express();
 
@@ -17,12 +16,6 @@ app.use(cookieParser());
 
 app.use(express.json());
 
-// Configuração do CSP
-app.use(helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'", "https://main--acompi.netlify.app"],
-    }
-  }));
 
 // app.all('/*', (req: Request, res: Response, next: NextFunction) => {
 //     const publicRoutes = ['/login', '/cadastro', '/cadastro' + req.params[0].slice(8), '/modificar-senha', '/confirmacao'];
