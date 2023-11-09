@@ -20,9 +20,7 @@ app.use(express.json());
 // Configuração do CSP
 app.use(helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "https://main--acompi.netlify.app"],
-      styleSrc: ["'self'", "https://main--acompi.netlify.app"],
+      defaultSrc: ["'self'", "https://main--acompi.netlify.app"],
     }
   }));
 
