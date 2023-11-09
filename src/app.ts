@@ -16,6 +16,12 @@ app.use(cookieParser());
 
 app.use(express.json());
 
+// Configuração do CSP
+app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self' https://main--acompi.netlify.app/; style-src 'self' https://main--acompi.netlify.app/");
+    next();
+  });
+
 // app.all('/*', (req: Request, res: Response, next: NextFunction) => {
 //     const publicRoutes = ['/login', '/cadastro', '/cadastro' + req.params[0].slice(8), '/modificar-senha', '/confirmacao'];
 //     for (let i = 0; i < publicRoutes.length; i += 1) {

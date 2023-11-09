@@ -21,13 +21,13 @@ model Aluno {
 }
 
 model Professor {
-  id                 Int     @id @default(autoincrement())
+  id                 Int      @id @default(autoincrement())
   email              String
   nome               String
   senha              String
-  codigo_confirmacao String  @unique
+  codigo_confirmacao String   @unique
   status             Boolean?
-  turmas             Turma[] @relation("professor")
+  turmas             Turma[]  @relation("professor")
 
   @@unique([email, status])
   @@map("professor")
